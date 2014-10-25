@@ -15,8 +15,8 @@ if you think about the feature it self of one **Entry Point** you probably agree
 me that it's not only **one point** but a mixed of many **components** in many cases !
 
 
-In order to avoid what i call **SMFB** architecture (understand : **S**uper **M**ega
-**F**uc\*\*\*\* **B**rain, like a **Controller**) i present you  **Minibus** !
+In order to avoid what i call **SMFB** architecture (understand : Super Mega
+Fuc\*\*\*\* Brain, like a **Controller**) i present you  **Minibus** !
 
 
 The principle is simple. In order to handle an application **Entry Point** we need
@@ -26,7 +26,7 @@ tree **components** :
 - Some `Station`, that can handle a minibus at some point (replace the controller).
 - Finally a bus `Line` that contains `Station` and can be followed by a `Minibus`
 
-## MV**C** vs MVB (**M**odel **V**iew **B**us)
+## MVC vs MVB (Model View Bus)
 
 To understand the differences between those two patterns this is some wonderfull
 art illustrating the point :
