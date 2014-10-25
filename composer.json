@@ -18,12 +18,13 @@
         "php": ">=5.4",
         "symfony/event-dispatcher": "~2.4",
         "symfony/options-resolver": "~2.4",
-        "symfony/http-foundation": "~2.4"
+        "symfony/http-foundation": "~2.4",
+        "docteurklein/funk-spec": "dev-master"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": {"": "src"}
+        "psr-0": {"funk": "", "": "src"}
     }
 }

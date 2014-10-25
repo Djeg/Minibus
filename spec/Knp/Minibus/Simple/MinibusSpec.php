@@ -35,5 +35,10 @@ class MinibusSpec extends ObjectBehavior
         $this->getPassenger('plop')->shouldReturn('some data');
         $this->getPassenger('plip')->shouldReturn('other data');
         $this->getPassenger('unexistent', 'default value')->shouldReturn('default value');
+
+        $this->setPassengers(['some' => 'passengers']);
+
+        $this->getPassenger('some')->shouldReturn('passengers');
     }
+
 }

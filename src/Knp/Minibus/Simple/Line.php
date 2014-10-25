@@ -6,7 +6,7 @@ use Knp\Minibus\Line as LineInterface;
 use Knp\Minibus\Event\EventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Knp\Minibus\Station;
-use Knp\Minibus\Minibus;
+use Knp\Minibus\Minibus as MinibusInterface;
 use Knp\Minibus\Event\LineEvents;
 
 class Line implements LineInterface
@@ -46,7 +46,7 @@ class Line implements LineInterface
         return $this;
     }
 
-    public function follow(Minibus $minibus)
+    public function follow(MinibusInterface $minibus)
     {
         $startEvent = $this->eventFactory->createStart();
         $startEvent->setMinibus($minibus);
