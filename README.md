@@ -7,6 +7,37 @@ sotware easily ? Do not search anymore, you've just find **the** place!
 Ladies and gentleman, let me present the famous, the incredible, the revolutionary
 **PHP Minibus** !
 
+## The goal
+
+If you are like me, you are probabling coding software solutions. In many software
+architecture the story start by an **Entry point** (cf: a controller in an MVC application). But
+if you think about the feature it self of one **Entry Point** you probably agree with
+me that it's not only **one point** but a mixed of many **components** in many cases !
+
+
+In order to avoid what i call **SMFB** architecture (understand : **S**uper **M**ega
+**F**uc\*\*\*\* **B**rain, like a **Controller**) i present you  **Minibus** !
+
+
+The principle is simple. In order to handle an application **Entry Point** we need
+tree **components** :
+
+- A `Minibus`, contains various passengers (understand data).
+- Some `Station`, that can handle a minibus at some point (replace the controller).
+- Finally a bus `Line` that contains `Station` and can be followed by a `Minibus`
+
+## MV**C** vs MVB (**M**odel **V**iew **B**us)
+
+To understand the differences between those two patterns this is some wonderfull
+art illustrating the point :
+
+
+### The MVC
+![MVC Art](.images/MVC.png)
+
+### The MVB
+![MVB Art](.images/MVB.png)
+
 ## I can't wait ! Let's start traveling !
 
 You're wondering how it is possible to travel thrue software lands with php, this
