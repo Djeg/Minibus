@@ -13,9 +13,17 @@ use Symfony\Component\EventDispatcher\Event;
 class StartEvent extends Event
 {
     /**
-     * @var Minibus|null $minibus
+     * @var Minibus $minibus
      */
     private $minibus;
+
+    /**
+     * @param Minibus $minibus
+     */
+    public function __construct(Minibus $minibus)
+    {
+        $this->minibus = $minibus;
+    }
 
     /**
      * @param Minibus $minibus

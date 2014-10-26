@@ -8,6 +8,7 @@ use Knp\Minibus\Minibus;
 use Knp\Minibus\Event\TerminusEvent;
 use Knp\Minibus\Station;
 use Knp\Minibus\Event\GateEvent;
+use Knp\Minibus\Event\StartEvent;
 
 class EventFactorySpec extends ObjectBehavior
 {
@@ -16,9 +17,9 @@ class EventFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Event\EventFactory');
     }
 
-    function it_create_a_start_event()
+    function it_create_a_start_event(Minibus $bus)
     {
-        $this->createStart()->shouldHaveType('Knp\Minibus\Event\StartEvent');
+        $this->createStart($bus)->shouldReturnStartEventWith($bus);
     }
 
     function it_create_a_terminus_event(Minibus $minibus)
@@ -47,6 +48,13 @@ class EventFactorySpec extends ObjectBehavior
                 }
 
                 return $event->getMinibus() === $minibus && $event->getStation() === $station;
+            },
+            'returnStartEventWith' => function ($event, $minibus) {
+                if (!$event instanceof StartEvent) {
+                    return false;
+                }
+
+                return $event->getMinibus() === $minibus;
             },
         ];
     }

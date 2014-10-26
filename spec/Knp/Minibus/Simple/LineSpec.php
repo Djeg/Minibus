@@ -40,8 +40,7 @@ class LineSpec extends ObjectBehavior
         Station $station1,
         Station $station2
     ) {
-        $factory->createStart()->willReturn($startEvent);
-        $startEvent->setMinibus($minibus)->shouldBeCalled();
+        $factory->createStart($minibus)->willReturn($startEvent);
         $dispatcher->dispatch(LineEvents::START, $startEvent)->shouldBeCalled();
         $startEvent->getMinibus()->willReturn($minibus);
 

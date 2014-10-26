@@ -13,11 +13,13 @@ use Knp\Minibus\Station;
 class EventFactory
 {
     /**
+     * @param Minibus $minibus
+     *
      * @return StartEvent
      */
-    public function createStart()
+    public function createStart(Minibus $minibus)
     {
-        return new StartEvent;
+        return new StartEvent($minibus);
     }
 
     /**

@@ -48,8 +48,7 @@ class Line implements LineInterface
 
     public function follow(MinibusInterface $minibus)
     {
-        $startEvent = $this->eventFactory->createStart();
-        $startEvent->setMinibus($minibus);
+        $startEvent = $this->eventFactory->createStart($minibus);
 
         $this->dispatcher->dispatch(LineEvents::START, $startEvent);
 
