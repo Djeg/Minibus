@@ -21,3 +21,4 @@ filter:
     excluded_paths:
         - 'spec/*'
         - 'example/*'
+        - 'funk/*'
