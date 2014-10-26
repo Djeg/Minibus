@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @author David Jegat <david.jegat@gmail.com>
  */
-interface OpeningGateExpectation
+interface ResolveEnteringPassengers
 {
     /**
      * @param OptionsResolverInterface $resolver

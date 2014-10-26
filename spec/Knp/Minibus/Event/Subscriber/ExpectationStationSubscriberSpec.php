@@ -9,8 +9,8 @@ use Knp\Minibus\Event\GateEvent;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Knp\Minibus\Event\Subscriber\ExpectationStationSubscriber;
 use Knp\Minibus\Minibus;
-use Knp\Minibus\Expectation\OpeningGateExpectation;
-use Knp\Minibus\Expectation\ClosingGateExpectation;
+use Knp\Minibus\Expectation\ResolveEnteringPassengers;
+use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 use Knp\Minibus\Station;
 
 class ExpectationStationSubscriberSpec extends ObjectBehavior
@@ -42,7 +42,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
     function it_validate_entering_passengers_for_a_station(
         GateEvent $event,
         Minibus $minibus,
-        OpeningGateExpectation $station,
+        ResolveEnteringPassengers $station,
         $resolver
     ) {
         $event->getMinibus()->willReturn($minibus);
@@ -62,7 +62,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
     function it_validate_leaving_passengers_for_a_station(
         GateEvent $event,
         Minibus $minibus,
-        ClosingGateExpectation $station,
+        ResolveLeavingPassengers $station,
         $resolver
     ) {
         $event->getMinibus()->willReturn($minibus);
@@ -90,13 +90,9 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
 
         $minibus->getPassengers()->willReturn(['some passengers']);
 
+        $resolver->setDefaults(['some passengers'])->shouldBeCalled();
         $resolver->resolve(Argument::any())->shouldNotBeCalled();
 
         $this->validateEnteringPassengers($event);
-
-        $resolver->setDefaults(['some passengers'])->shouldBeCalled();
-        $minibus->setPassengers()->shouldNotBeCalled();
-
-        $this->validateLeavingPassengers($event);
     }
 }

@@ -5,14 +5,14 @@ namespace Knp\Minibus\Event\Subscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Knp\Minibus\Event\LineEvents;
 use Knp\Minibus\Event\GateEvent;
-use Knp\Minibus\Expectation\OpeningGateExpectation;
+use Knp\Minibus\Expectation\ResolveEnteringPassengers;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Knp\Minibus\Expectation\ClosingGateExpectation;
+use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 
 /**
  * This subscriber can enhanced the station with some validation inside. If
- * a station implements the OpeningGateExpectation or ClosingGateExpectation
+ * a station implements the ResolveEnteringPassengers or ResolveLeavingPassengers
  * then an option resolver will resolve all of this stop.
  *
  * @author David Jegat <david.jegat@gmail.com>
@@ -23,11 +23,6 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
      * @var OptionsResolverInterface $resolver
      */
     private $resolver;
-
-    /**
-     * @var boolean $unresolvedOpeningStation
-     */
-    private $unresolvedOpeningStation;
 
     /**
      * {@inheritdoc}
@@ -47,7 +42,6 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
     public function __construct(OptionsResolverInterface $resolver = null)
     {
         $this->resolver                 = $resolver ?: new OptionsResolver;
-        $this->unresolvedOpeningStation = false;
     }
 
     /**
@@ -58,8 +52,8 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
         $minibus = $event->getMinibus();
         $station = $event->getStation();
 
-        if (!$station instanceof OpeningGateExpectation) {
-            $this->unresolvedOpeningStation = true;
+        if (!$station instanceof ResolveEnteringPassengers) {
+            $this->resolver->setDefaults($minibus->getPassengers());
 
             return;
         }
@@ -77,11 +71,8 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
         $minibus = $event->getMinibus();
         $station = $event->getStation();
 
-        if (!$station instanceof ClosingGateExpectation) {
-            if ($this->unresolvedOpeningStation) {
-                $this->resolver->setDefaults($minibus->getPassengers());
-                $this->unresolvedOpeningStation = false;
-            }
+        if (!$station instanceof ResolveLeavingPassengers) {
+            $this->resolver->setDefaults($minibus->getPassengers());
 
             return;
         }
