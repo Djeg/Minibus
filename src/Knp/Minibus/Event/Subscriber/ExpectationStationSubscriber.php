@@ -41,7 +41,7 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
      */
     public function __construct(OptionsResolverInterface $resolver = null)
     {
-        $this->resolver                 = $resolver ?: new OptionsResolver;
+        $this->resolver = $resolver ?: new OptionsResolver;
     }
 
     /**
@@ -49,18 +49,17 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
      */
     public function validateEnteringPassengers(GateEvent $event)
     {
-        $minibus = $event->getMinibus();
-        $station = $event->getStation();
-
-        if (!$station instanceof ResolveEnteringPassengers) {
-            $this->resolver->setDefaults($minibus->getPassengers());
+        if (!$event->getStation() instanceof ResolveEnteringPassengers) {
+            $this->resolver->setDefaults($event->getMinibus()->getPassengers());
 
             return;
         }
 
-        $station->setEnteringPassengers($this->resolver);
+        $event->getStation()->setEnteringPassengers($this->resolver);
 
-        $minibus->setPassengers($this->resolver->resolve($minibus->getPassengers()));
+        $event->getMinibus()->setPassengers($this->resolver->resolve(
+            $event->getMinibus()->getPassengers()
+        ));
     }
 
     /**
@@ -68,18 +67,17 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
      */
     public function validateLeavingPassengers(GateEvent $event)
     {
-        $minibus = $event->getMinibus();
-        $station = $event->getStation();
-
-        if (!$station instanceof ResolveLeavingPassengers) {
-            $this->resolver->setDefaults($minibus->getPassengers());
+        if (!$event->getStation() instanceof ResolveLeavingPassengers) {
+            $this->resolver->setDefaults($event->getMinibus()->getPassengers());
 
             return;
         }
 
-        $station->setLeavingPassengers($this->resolver);
+        $event->getStation()->setLeavingPassengers($this->resolver);
 
-        $minibus->setPassengers($this->resolver->resolve($minibus->getPassengers()));
+        $event->getMinibus()->setPassengers($this->resolver->resolve(
+            $event->getMinibus()->getPassengers()
+        ));
     }
 
     public function clearResolver()

@@ -1,4 +1,4 @@
-Minibus [![Build Status](https://travis-ci.org/Djeg/dolmen.svg)](https://travis-ci.org/Djeg/dolmen) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master)
+Minibus [![Build Status](https://travis-ci.org/Djeg/Minibus.svg)](https://travis-ci.org/Djeg/Minibus) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master)
 ========================================================================================================================================================================================================================================================================
 
 Hey welcome to you traveler! You are looking for a way of traveling thrue your
