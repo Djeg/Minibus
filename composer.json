@@ -4,7 +4,8 @@
     "require-dev": {
         "phpspec/phpspec": "*",
         "phpspec/nyan-formatters": "*",
-        "bossa/phpspec2-expect": "*"
+        "bossa/phpspec2-expect": "*",
+        "docteurklein/funk-spec": "dev-master"
     },
     "license": "WTFPL",
     "authors": [
@@ -19,7 +20,7 @@
         "symfony/event-dispatcher": "~2.4",
         "symfony/options-resolver": "~2.4",
         "symfony/http-foundation": "~2.4",
-        "docteurklein/funk-spec": "dev-master"
+        "symfony/config": "~2.4"
     },
     "config": {
         "bin-dir": "bin"

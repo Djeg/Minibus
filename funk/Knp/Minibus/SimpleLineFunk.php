@@ -12,6 +12,10 @@ use Knp\Minibus\Event\Subscriber\ExpectationStationSubscriber;
 use example\Knp\Minibus\Station\ResolvableLeavingStation;
 use example\Knp\Minibus\Station\ResolvableEnteringStation;
 use example\Knp\Minibus\Station\ResolvableEnteringAndLeavingStation;
+use Knp\Minibus\Event\LineEvents;
+use example\Knp\Minibus\Terminus\UselessTerminus;
+use Knp\Minibus\Terminal\TerminalCenter;
+use Knp\Minibus\Event\Listener\TerminusListener;
 
 class SimpleLineFunk implements Spec
 {
@@ -55,5 +59,23 @@ class SimpleLineFunk implements Spec
             'resolvable_entering'             => true,
             'resolvable_entering_and_leaving' => true,
         ]);
+    }
+
+    function it_handle_terminus()
+    {
+        $bus = new Minibus;
+        $bus->addPassenger('_terminus', 'text');
+
+        $center = new TerminalCenter($bus);
+        $center->addTerminus('text', new UselessTerminus);
+
+        $dispatcher = new EventDispatcher;
+        $dispatcher->addListener(LineEvents::TERMINUS, [new TerminusListener($center), 'handleTerminus']);
+
+        $line = new Line($dispatcher);
+
+        $line->addStation(new BasicStation);
+
+        expect($line->follow($bus))->toReturn('useless');
     }
 }
