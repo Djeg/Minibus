@@ -79,7 +79,7 @@ class TerminalCenter
      *
      * @throws TerminusNotFoundException
      *
-     * @return mixed, the resolved terminus::terminate result
+     * @return mixed the resolved terminus::terminate result
      */
     public function resolve($name, array $configuration = [])
     {
