@@ -3,8 +3,8 @@
 namespace Knp\Minibus\Terminus;
 
 use Knp\Minibus\Terminus\ConfigurableTerminus;
-use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
 use Knp\Minibus\Minibus;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * Display a twig template with the given configuration.
@@ -42,7 +42,7 @@ class TwigTemplateTerminus implements ConfigurableTerminus
     /**
      * {@inheritdoc}
      */
-    public function configure(NodeParentInterface $node)
+    public function configure(ArrayNodeDefinition $node)
     {
         $node
             ->children()

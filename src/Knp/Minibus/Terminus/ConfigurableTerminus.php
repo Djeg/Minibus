@@ -3,7 +3,7 @@
 namespace Knp\Minibus\Terminus;
 
 use Knp\Minibus\Minibus;
-use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * handle a minibus terminus but this time with configuration.
@@ -15,5 +15,5 @@ interface ConfigurableTerminus extends Terminus
     /**
      * @param NodeParentInterface $node
      */
-    public function configure(NodeParentInterface $node);
+    public function configure(ArrayNodeDefinition $node);
 }

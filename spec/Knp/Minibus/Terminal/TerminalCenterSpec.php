@@ -9,8 +9,8 @@ use Knp\Minibus\Minibus;
 use Knp\Minibus\Terminus\ConfigurableTerminus;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
 use Symfony\Component\Config\Definition\NodeInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class TerminalCenterSpec extends ObjectBehavior
 {
@@ -43,7 +43,7 @@ class TerminalCenterSpec extends ObjectBehavior
         $minibus,
         $processor,
         $builder,
-        NodeParentInterface $rootNode,
+        ArrayNodeDefinition $rootNode,
         NodeInterface $tree
     ) {
         $this->addTerminus('configurable_terminus', $configurableTerminus);
