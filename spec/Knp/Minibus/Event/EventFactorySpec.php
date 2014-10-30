@@ -17,17 +17,17 @@ class EventFactorySpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Event\EventFactory');
     }
 
-    function it_create_a_start_event(Minibus $bus)
+    function it_creates_a_start_event(Minibus $bus)
     {
         $this->createStart($bus)->shouldReturnStartEventWith($bus);
     }
 
-    function it_create_a_terminus_event(Minibus $minibus)
+    function it_creates_a_terminus_event(Minibus $minibus)
     {
         $this->createTerminus($minibus)->shouldReturnTerminusEventWith($minibus);
     }
 
-    function it_create_gate_event(Minibus $minibus, Station $station)
+    function it_creates_gate_event(Minibus $minibus, Station $station)
     {
         $this->createGate($minibus, $station)->shouldReturnGateEventWith($minibus, $station);
     }

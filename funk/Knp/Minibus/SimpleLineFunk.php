@@ -19,7 +19,7 @@ use Knp\Minibus\Event\Listener\TerminusListener;
 
 class SimpleLineFunk implements Spec
 {
-    function it_handle_basic_station()
+    function it_handles_basic_station()
     {
         $line = new Line(new EventDispatcher);
 
@@ -28,7 +28,7 @@ class SimpleLineFunk implements Spec
 
         $bus = new Minibus;
 
-        $line->follow($bus);
+        $line->lead($bus);
 
         expect($bus->getPassengers())->toReturn([
             'basic'       => true,
@@ -36,7 +36,7 @@ class SimpleLineFunk implements Spec
         ]);
     }
 
-    function it_handle_validable_station()
+    function it_handles_validable_station()
     {
         $dispatcher = new EventDispatcher;
         $dispatcher->addSubscriber(new ExpectationStationSubscriber);
@@ -50,7 +50,7 @@ class SimpleLineFunk implements Spec
 
         $bus = new Minibus;
 
-        $line->follow($bus);
+        $line->lead($bus);
 
         expect($bus->getPassengers())->toReturn([
             'basic'                           => true,
@@ -61,7 +61,7 @@ class SimpleLineFunk implements Spec
         ]);
     }
 
-    function it_handle_terminus()
+    function it_handles_terminus()
     {
         $bus = new Minibus;
         $bus->addPassenger('_terminus', 'text');
@@ -76,6 +76,6 @@ class SimpleLineFunk implements Spec
 
         $line->addStation(new BasicStation);
 
-        expect($line->follow($bus))->toReturn('useless');
+        expect($line->lead($bus))->toReturn('useless');
     }
 }

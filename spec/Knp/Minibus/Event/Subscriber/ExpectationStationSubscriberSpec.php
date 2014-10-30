@@ -30,7 +30,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\EventDispatcher\EventSubscriberInterface');
     }
 
-    function it_subscribe_to_line_events()
+    function it_subscribes_to_line_events()
     {
         expect(ExpectationStationSubscriber::getSubscribedEvents())->toReturn([
             LineEvents::GATE_OPEN  => 'validateEnteringPassengers',
@@ -39,7 +39,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
         ]);
     }
 
-    function it_validate_entering_passengers_for_a_station(
+    function it_validates_entering_passengers_for_a_station(
         GateEvent $event,
         Minibus $minibus,
         ResolveEnteringPassengers $station,
@@ -59,7 +59,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
         $this->validateEnteringPassengers($event);
     }
 
-    function it_validate_leaving_passengers_for_a_station(
+    function it_validates_leaving_passengers_for_a_station(
         GateEvent $event,
         Minibus $minibus,
         ResolveLeavingPassengers $station,
@@ -79,7 +79,7 @@ class ExpectationStationSubscriberSpec extends ObjectBehavior
         $this->validateLeavingPassengers($event);
     }
 
-    function it_add_to_the_resolver_defaults_all_passengers_for_non_supported_station_that_modified_minibus(
+    function it_adds_to_the_default_resolver_all_passengers_for_non_supported_station_that_modified_minibus(
         GateEvent $event,
         Minibus $minibus,
         Station $station,

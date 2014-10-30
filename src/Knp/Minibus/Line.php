@@ -3,7 +3,7 @@
 namespace Knp\Minibus;
 
 /**
- * A minibus follow this instance of a line in order of acheive the
+ * A minibus is led by this instance of a line in order of acheive the
  * requested destination. Please have a good trip ^.^
  *
  * @author David Jegat <david.jegat@gmail.com>
@@ -18,5 +18,5 @@ interface Line
     /**
      * @param Minibus $bus
      */
-    public function follow(Minibus $bus);
+    public function lead(Minibus $bus);
 }

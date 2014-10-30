@@ -7,6 +7,6 @@ namespace Knp\Minibus\Exception;
  *
  * @author David Jegat <david.jegat@gmail.com>
  */
-class TerminusAlwaysExistException extends \Exception
+class TerminusAlwaysExistsException extends \Exception
 {
 }

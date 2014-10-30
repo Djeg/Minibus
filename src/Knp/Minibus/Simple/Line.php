@@ -46,7 +46,7 @@ class Line implements LineInterface
         return $this;
     }
 
-    public function follow(MinibusInterface $minibus)
+    public function lead(MinibusInterface $minibus)
     {
         $startEvent = $this->eventFactory->createStart($minibus);
 
