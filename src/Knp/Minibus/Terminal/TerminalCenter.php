@@ -4,7 +4,7 @@ namespace Knp\Minibus\Terminal;
 
 use Knp\Minibus\Minibus;
 use Knp\Minibus\Terminus\Terminus;
-use Knp\Minibus\Exception\TerminusAlwaysExistException;
+use Knp\Minibus\Exception\TerminusAlwaysExistsException;
 use Knp\Minibus\Exception\TerminusNotFoundException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -55,14 +55,14 @@ class TerminalCenter
      * @param mixed    $name
      * @param Terminus $terminus
      *
-     * @throws TerminusAlwaysExistException
+     * @throws TerminusAlwaysExistsException
      *
      * @return TerminalCenter
      */
     public function addTerminus($name, Terminus $terminus)
     {
         if (isset($this->terminals[$name])) {
-            throw new TerminusAlwaysExistException(sprintf(
+            throw new TerminusAlwaysExistsException(sprintf(
                 'the terminus %s is always present in the terminal center :-(',
                 $name
             ));

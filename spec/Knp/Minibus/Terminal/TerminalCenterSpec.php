@@ -38,7 +38,7 @@ class TerminalCenterSpec extends ObjectBehavior
         ;
     }
 
-    function it_resolve_terminus_configuration_for_configurable_terminus(
+    function it_resolves_terminus_configuration_for_configurable_terminus(
         ConfigurableTerminus $configurableTerminus,
         $minibus,
         $processor,
@@ -57,17 +57,17 @@ class TerminalCenterSpec extends ObjectBehavior
         $this->resolve('configurable_terminus', ['some_configuration'])->shouldReturn('terminus result');
     }
 
-    function it_can_not_contains_the_same_terminus_name_twice(Terminus $terminus1, Terminus $terminus2)
+    function it_cannot_contain_the_same_terminus_name_twice(Terminus $terminus1, Terminus $terminus2)
     {
         $this->addTerminus('some_name', $terminus1);
 
         $this
-            ->shouldThrow('Knp\Minibus\Exception\TerminusAlwaysExistException')
+            ->shouldThrow('Knp\Minibus\Exception\TerminusAlwaysExistsException')
             ->duringAddTerminus('some_name', $terminus2)
         ;
 
         $this
-            ->shouldThrow('Knp\Minibus\Exception\TerminusAlwaysExistException')
+            ->shouldThrow('Knp\Minibus\Exception\TerminusAlwaysExistsException')
             ->duringAddTerminus('some_name', $terminus1)
         ;
     }

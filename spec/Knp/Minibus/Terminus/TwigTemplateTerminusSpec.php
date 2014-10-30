@@ -19,12 +19,12 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Terminus\TwigTemplateTerminus');
     }
 
-    function it_is_a_configurable_termnius()
+    function it_is_a_configurable_terminus()
     {
         $this->shouldHaveType('Knp\Minibus\Terminus\ConfigurableTerminus');
     }
 
-    function it_terminate_by_returning_a_template_result(Minibus $minibus, $twig)
+    function it_terminates_by_returning_a_template_result(Minibus $minibus, $twig)
     {
         $twig->render('template.twig', ['minibus' => ['minibus content']])->willReturn('template content');
 

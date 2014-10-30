@@ -30,7 +30,7 @@ class LineSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Line');
     }
 
-    function it_follow_all_the_station_and_dispatch_line_events(
+    function it_follows_all_the_stations_and_dispatches_line_events(
         $dispatcher,
         $factory,
         StartEvent $startEvent,
@@ -61,6 +61,6 @@ class LineSpec extends ObjectBehavior
 
         $terminusEvent->getFinalData()->willReturn('final data');
 
-        $this->follow($minibus)->shouldReturn('final data');
+        $this->lead($minibus)->shouldReturn('final data');
     }
 }

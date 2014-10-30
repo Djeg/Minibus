@@ -24,7 +24,7 @@ three **components**:
 
 - A `Minibus`, which contains various passengers (understand data).
 - Some `Stations`, that can handle a minibus at some point (replace the controller).
-- Finally a bus `Line` that contains `Stations` and can be followed by a `Minibus`
+- Finally a bus `Line` that contains `Stations` and can guide a `Minibus`
 
 ## MVC vs MVB (Model View Bus)
 
@@ -53,7 +53,7 @@ use Knp\Minibus\Simple\Minibus;
 # Before traveling, we need a bus line
 $busLine = new Line(new EventDispatcher);
 
-# Okay, in order to make all the minibus passengers destination we need to create
+# Okay, in order to take all the minibus passengers to their destination we need to create
 # Bus stations !
 class DreamlandStation implements Station
 {
@@ -67,8 +67,8 @@ class DreamlandStation implements Station
 # Let's add the station to our bus line :
 $busLine->addStation(new DreamlandStation);
 
-# Now we just have to follow the bus line with a minibus:
-$busLine->follow(new Minibus);
+# Now we just to make the bus line leads the minibus:
+$busLine->lead(new Minibus);
 ```
 
 ## Get more!

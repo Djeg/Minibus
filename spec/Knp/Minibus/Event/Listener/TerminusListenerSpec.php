@@ -20,7 +20,7 @@ class TerminusListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Event\Listener\TerminusListener');
     }
 
-    function it_support_only_minibus_with_terminus_passenger(
+    function it_supports_only_minibus_with_terminus_passenger(
         TerminusEvent $event,
         Minibus $minibus,
         $center
@@ -34,7 +34,7 @@ class TerminusListenerSpec extends ObjectBehavior
         $this->handleTerminus($event);
     }
 
-    function it_resolve_minibus_terminal_passenger_and_store_it_inside_terminal_event_final_data( 
+    function it_resolves_minibus_terminal_passenger_and_stores_it_inside_terminal_event_final_data( 
         TerminusEvent $event,
         Minibus $minibus,
         $center
