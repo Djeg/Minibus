@@ -42,26 +42,14 @@ class JmsSerializerTerminus implements ConfigurableTerminus
      */
     public function terminate(Minibus $minibus, array $config)
     {
-        if (null !== $config['version']) {
-            $this->context->setVersion($config['version']);
-        }
-
-        if (!empty($config['groups'])) {
-            $this->context->setGroups($config['groups']);
-        }
+        $this->configureContext($config);
 
         $minibus->addPassenger('_http_headers', [
             'Content-Type' => 'application/json'
         ]);
 
-        if ($config['enable_max_depth_check']) {
-            $this->context->enableMaxDepthChecks();
-        }
-
-        $passengers = $this->extractValidPassengers($minibus);
-
         return $this->serializer->serialize(
-            $passengers,
+            $this->extractValidPassengers($minibus),
             $config['format'],
             $this->context
         );
@@ -112,5 +100,23 @@ class JmsSerializerTerminus implements ConfigurableTerminus
         }
 
         return $passengers;
+    }
+
+    /**
+     * @param array $config
+     */
+    private function configureContext(array $config)
+    {
+        if (null !== $config['version']) {
+            $this->context->setVersion($config['version']);
+        }
+
+        if (!empty($config['groups'])) {
+            $this->context->setGroups($config['groups']);
+        }
+
+        if ($config['enable_max_depth_check']) {
+            $this->context->enableMaxDepthChecks();
+        }
     }
 }
