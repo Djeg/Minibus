@@ -16,6 +16,7 @@ use Knp\Minibus\Event\LineEvents;
 use example\Knp\Minibus\Terminus\UselessTerminus;
 use Knp\Minibus\Terminal\TerminalCenter;
 use Knp\Minibus\Event\Listener\TerminusListener;
+use Knp\Minibus\Terminal\RawTerminalCenter;
 
 class SimpleLineFunk implements Spec
 {
@@ -66,7 +67,7 @@ class SimpleLineFunk implements Spec
         $bus = new Minibus;
         $bus->addPassenger('_terminus', 'text');
 
-        $center = new TerminalCenter($bus);
+        $center = new RawTerminalCenter();
         $center->addTerminus('text', new UselessTerminus);
 
         $dispatcher = new EventDispatcher;
