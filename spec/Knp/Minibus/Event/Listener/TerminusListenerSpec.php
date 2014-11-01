@@ -43,7 +43,7 @@ class TerminusListenerSpec extends ObjectBehavior
         $minibus->getPassenger('_terminus')->willReturn('terminus_name');
         $minibus->getPassenger('_terminus_config', [])->willReturn(['terminus config']);
 
-        $center->resolve('terminus_name', ['terminus config'])->willReturn('terminus data');
+        $center->resolve($minibus, 'terminus_name', ['terminus config'])->willReturn('terminus data');
 
         $event->setFinalData('terminus data')->shouldBeCalled();
 

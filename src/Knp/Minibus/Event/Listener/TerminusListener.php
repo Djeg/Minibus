@@ -57,6 +57,6 @@ class TerminusListener
         $terminus      = $minibus->getPassenger($this->key);
         $configuration = $minibus->getPassenger($this->configKey, []);
 
-        $event->setFinalData($this->center->resolve($terminus, $configuration));
+        $event->setFinalData($this->center->resolve($minibus, $terminus, $configuration));
     }
 }
