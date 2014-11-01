@@ -46,6 +46,20 @@ class Minibus implements MinibusInterface, \IteratorAggregate
     /**
      * {@inheritdoc}
      */
+    public function removePassenger($name)
+    {
+        if (!isset($this->passengers[$name])) {
+            return $this;
+        }
+
+        unset($this->passengers[$name]);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setPassengers(array $passengers)
     {
         $this->passengers = $passengers;

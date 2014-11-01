@@ -29,6 +29,7 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
     {
         $minibus->getPassengers()->willReturn(['passengers']);
         $serializer->serialize(['passengers'], 'json', $context)->willReturn('["passengers"]');
+        $minibus->addPassenger('_http_headers', ['Content-Type' => 'application/json'])->shouldBeCalled();
 
         $this->terminate($minibus, [
             'format'                 => 'json',

@@ -11,12 +11,13 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\NodeInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Knp\Minibus\Config\TreeBuilderFactory;
 
 class RawTerminalCenterSpec extends ObjectBehavior
 {
-    function let(Processor $processor, TreeBuilder $builder)
+    function let(Processor $processor, TreeBuilderFactory $builderFactory)
     {
-        $this->beConstructedWith($processor, $builder);
+        $this->beConstructedWith($processor, $builderFactory);
     }
 
     function it_is_initializable()
@@ -50,10 +51,12 @@ class RawTerminalCenterSpec extends ObjectBehavior
         ConfigurableTerminus $configurableTerminus,
         Minibus $minibus,
         $processor,
-        $builder,
+        $builderFactory,
+        TreeBuilder $builder,
         ArrayNodeDefinition $rootNode,
         NodeInterface $tree
     ) {
+        $builderFactory->create()->willReturn($builder);
         $this->addTerminus('configurable_terminus', $configurableTerminus);
         $builder->root('configurable_terminus')->willReturn($rootNode);
         $configurableTerminus->configure($rootNode)->shouldBeCalled();

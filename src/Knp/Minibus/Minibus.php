@@ -34,6 +34,13 @@ interface Minibus
     public function setPassengers(array $passengers);
 
     /**
+     * @param string $name
+     *
+     * @return Minibus
+     */
+    public function removePassenger($name);
+
+    /**
      * @return array
      */
     public function getPassengers();

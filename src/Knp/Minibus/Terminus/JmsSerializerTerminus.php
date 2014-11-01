@@ -50,12 +50,18 @@ class JmsSerializerTerminus implements ConfigurableTerminus
             $this->context->setGroups($config['groups']);
         }
 
+        $minibus->addPassenger('_http_headers', [
+            'Content-Type' => 'application/json'
+        ]);
+
         if ($config['enable_max_depth_check']) {
             $this->context->enableMaxDepthChecks();
         }
 
+        $passengers = $this->extractValidPassengers($minibus);
+
         return $this->serializer->serialize(
-            $minibus->getPassengers(),
+            $passengers,
             $config['format'],
             $this->context
         );
@@ -87,5 +93,24 @@ class JmsSerializerTerminus implements ConfigurableTerminus
                 ->end()
             ->end()
         ;
+    }
+
+    /**
+     * @param Minibus $minibus
+     *
+     * @return array the valid passengers
+     */
+    private function extractValidPassengers(Minibus $minibus)
+    {
+        $passengers = [];
+        foreach ($minibus->getPassengers() as $name => $passenger) {
+            if (strpos($name, '_') === 0) {
+                continue;
+            }
+
+            $passengers[$name] = $passenger;
+        }
+
+        return $passengers;
     }
 }

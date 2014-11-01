@@ -49,9 +49,8 @@ class HttpResponseTerminalCenter implements TerminalCenter
      */
     public function resolve(Minibus $minibus, $name, array $configuration = [])
     {
-        $response = $this->builder->build($minibus);
-
         $content = $this->center->resolve($minibus, $name, $configuration);
+        $response = $this->builder->build($minibus);
         $response->setContent($content);
 
         return $response;

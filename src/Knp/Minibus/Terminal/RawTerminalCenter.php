@@ -9,6 +9,7 @@ use Knp\Minibus\Exception\TerminusNotFoundException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Knp\Minibus\Terminus\ConfigurableTerminus;
+use Knp\Minibus\Config\TreeBuilderFactory;
 
 /**
  * Contains all the terminus and just return the found terminus raw data.
@@ -28,21 +29,21 @@ class RawTerminalCenter implements TerminalCenter
     private $processor;
 
     /**
-     * @var TreeBuilder $builder
+     * @var TreeBuilderFactory $builderFactory
      */
-    private $builder;
+    private $builderFactory;
 
     /**
-     * @param Processor $processor
-     * @param TreeBuilder $builder
+     * @param Processor          $processor
+     * @param TreeBuilderFactory $builder
      */
     public function __construct(
-        Processor $processor = null,
-        TreeBuilder $builder = null
+        Processor $processor               = null,
+        TreeBuilderFactory $builderFactory = null
     ) {
-        $this->terminals = [];
-        $this->processor = $processor ?: new Processor;
-        $this->builder   = $builder ?: new TreeBuilder;
+        $this->terminals      = [];
+        $this->processor      = $processor ?: new Processor;
+        $this->builderFactory = $builderFactory ?: new TreeBuilderFactory;
     }
 
     /**
@@ -77,8 +78,9 @@ class RawTerminalCenter implements TerminalCenter
         $terminus = $this->terminals[$name];
 
         if ($terminus instanceof ConfigurableTerminus) {
-            $terminus->configure($this->builder->root($name));
-            $configuration = $this->processor->process($this->builder->buildTree(), [$configuration]);
+            $builder = $this->builderFactory->create();
+            $terminus->configure($builder->root($name));
+            $configuration = $this->processor->process($builder->buildTree(), [$configuration]);
         }
 
         return $terminus->terminate($minibus, $configuration);
