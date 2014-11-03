@@ -1,5 +1,5 @@
-Minibus [![Build Status](https://travis-ci.org/Djeg/Minibus.svg)](https://travis-ci.org/Djeg/Minibus) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master)
-========================================================================================================================================================================================================================================================================
+Minibus [![Build Status](https://travis-ci.org/Djeg/Minibus.svg)](https://travis-ci.org/Djeg/Minibus) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Djeg/Minibus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+======================================================================================================================================================================================================================================================================================================================================================================================================================
 
 Hey welcome to you traveler! You are looking for a way of traveling through your
 software easily? Do not search anymore, you've just find *the* place!
