@@ -9,7 +9,7 @@ use Knp\Minibus\Terminal\RawTerminalCenter;
 use Knp\Minibus\Terminal\HttpResponseTerminalCenter;
 use Knp\Minibus\Event\Listener\TerminusListener;
 use Knp\Minibus\Event\LineEvents;
-use Knp\Minibus\Station\NameStation;
+use example\Knp\Minibus\Station\NameStation;
 use Knp\Minibus\Http\ResponseBuilder;
 use Knp\Minibus\Terminus\JmsSerializerTerminus;
 use Knp\Minibus\Terminus\TwigTemplateTerminus;

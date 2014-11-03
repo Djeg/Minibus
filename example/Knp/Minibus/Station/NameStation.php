@@ -1,6 +1,6 @@
 <?php
 
-namespace Knp\Minibus\Station;
+namespace example\Knp\Minibus\Station;
 
 use Knp\Minibus\Station;
 use Knp\Minibus\Minibus;
