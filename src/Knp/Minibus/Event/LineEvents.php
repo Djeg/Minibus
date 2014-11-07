@@ -7,11 +7,11 @@ namespace Knp\Minibus\Event;
  */
 abstract class LineEvents
 {
-    const START      = 'knp.minibus.start';
+    const START      = 'knp_minibus.start';
 
-    const TERMINUS   = 'knp.minibus.terminus';
+    const TERMINUS   = 'knp_minibus.terminus';
 
-    const GATE_OPEN  = 'knp.minibus.gate_open';
+    const GATE_OPEN  = 'knp_minibus.gate_open';
 
-    const GATE_CLOSE = 'knp.minibus.gate_close';
+    const GATE_CLOSE = 'knp_minibus.gate_close';
 }
