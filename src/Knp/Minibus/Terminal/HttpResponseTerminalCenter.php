@@ -5,7 +5,7 @@ namespace Knp\Minibus\Terminal;
 use Knp\Minibus\Terminal\TerminalCenter;
 use Knp\Minibus\Terminus\Terminus;
 use Knp\Minibus\Minibus;
-use Knp\Minibus\Http\ResponseBuilder;
+use Knp\Minibus\Http\HttpMinibus;
 
 /**
  * A simple terminal center wrapping for an http response return.
@@ -20,18 +20,11 @@ class HttpResponseTerminalCenter implements TerminalCenter
     private $center;
 
     /**
-     * @var ResponseBuilder $builder
-     */
-    private $builder;
-
-    /**
      * @param TerminalCenter  $center
-     * @param ResponseBuilder $builder
      */
-    public function __construct(TerminalCenter $center, ResponseBuilder $builder)
+    public function __construct(TerminalCenter $center)
     {
         $this->center  = $center;
-        $this->builder = $builder;
     }
 
     /**
@@ -49,10 +42,13 @@ class HttpResponseTerminalCenter implements TerminalCenter
      */
     public function resolve(Minibus $minibus, $name, array $configuration = [])
     {
-        $content = $this->center->resolve($minibus, $name, $configuration);
-        $response = $this->builder->build($minibus);
-        $response->setContent($content);
+        if (!$minibus instanceof HttpMinibus) {
+            throw new \InvalidArgumentException('The HttpResponseBuilderTerminalCenter only accept HttpMinibus !');
+        }
 
-        return $response;
+        $content  = $this->center->resolve($minibus, $name, $configuration);
+        $minibus->getResponse()->setContent($content);
+
+        return $minibus->getResponse();
     }
 }

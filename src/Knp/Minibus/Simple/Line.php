@@ -46,6 +46,14 @@ class Line implements LineInterface
         return $this;
     }
 
+    /**
+     * Lead a minibus to this destination. This implementation raise a few events
+     * in order to manipulate a bus life.
+     *
+     * @param MinibusInterface $minibus
+     *
+     * @return mixed the final data return by the LineEvents::TERMINUS event
+     */
     public function lead(MinibusInterface $minibus)
     {
         $startEvent = $this->eventFactory->createStart($minibus);

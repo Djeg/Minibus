@@ -7,6 +7,9 @@ use Prophecy\Argument;
 use JMS\Serializer\Serializer;
 use Knp\Minibus\Minibus;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\HttpFoundation\HeaderBag;
+use Symfony\Component\HttpFoundation\Response;
+use Knp\Minibus\Http\HttpMinibus;
 
 class JmsSerializerTerminusSpec extends ObjectBehavior
 {
@@ -25,11 +28,18 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\Minibus\Terminus\ConfigurableTerminus');
     }
 
-    function it_should_serialize_the_minibus_passengers(Minibus $minibus, $serializer, $context)
-    {
+    function it_should_serialize_the_minibus_passengers_and_set_http_headers(
+        HttpMinibus $minibus,
+        $serializer,
+        $context,
+        Response $response,
+        HeaderBag $headers
+    ) {
         $minibus->getPassengers()->willReturn(['passengers']);
         $serializer->serialize(['passengers'], 'json', $context)->willReturn('["passengers"]');
-        $minibus->addPassenger('_http_headers', ['Content-Type' => 'application/json'])->shouldBeCalled();
+        $minibus->getResponse()->willReturn($response);
+        $response->headers = $headers;
+        $headers->set('Content-Type', 'application/json')->shouldBeCalled();
 
         $this->terminate($minibus, [
             'format'                 => 'json',

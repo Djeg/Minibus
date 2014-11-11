@@ -8,13 +8,13 @@ use Knp\Minibus\Minibus;
 use Knp\Minibus\Terminal\TerminalCenter;
 use Knp\Minibus\Terminus\Terminus;
 use Symfony\Component\HttpFoundation\Response;
-use Knp\Minibus\Http\ResponseBuilder;
+use Knp\Minibus\Http\HttpMinibus;
 
 class HttpResponseTerminalCenterSpec extends ObjectBehavior
 {
-    function let(TerminalCenter $center, ResponseBuilder $builder)
+    function let(TerminalCenter $center)
     {
-        $this->beConstructedWith($center, $builder);
+        $this->beConstructedWith($center);
     }
 
     function it_is_initializable()
@@ -34,13 +34,18 @@ class HttpResponseTerminalCenterSpec extends ObjectBehavior
         $this->addTerminus('some name', $terminus);
     }
 
-    function it_resolve_any_minibus_into_an_http_response(Minibus $minibus, Response $response, $center, $builder)
+    function it_resolve_any_minibus_into_an_http_response(HttpMinibus $minibus, Response $response, $center)
     {
-        $builder->build($minibus)->shouldBeCalled()->willReturn($response);
+        $minibus->getResponse()->shouldBeCalled()->willReturn($response);
         $response->setContent('content')->shouldBeCalled();
 
         $center->resolve($minibus, 'some terminus', ['configuration'])->willReturn('content');
 
         $this->resolve($minibus, 'some terminus', ['configuration'])->shouldReturn($response);
+    }
+
+    function it_only_supports_http_minibus(Minibus $minibus)
+    {
+        $this->shouldThrow('InvalidArgumentException')->duringResolve($minibus, 'some terminus', ['some configuration']);
     }
 }

@@ -27,6 +27,13 @@ interface Minibus
     public function getPassenger($name, $defaultPassenger = null);
 
     /**
+     * @param mixed $name
+     *
+     * @return boolean
+     */
+    public function hasPassenger($name);
+
+    /**
      * @param array $passengers
      *
      * @return Minibus

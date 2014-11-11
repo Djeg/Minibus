@@ -7,6 +7,8 @@ use JMS\Serializer\Serializer;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Knp\Minibus\Minibus;
 use JMS\Serializer\SerializationContext;
+use Knp\Minibus\Http\HttpMinibus;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Serialize minibus passengers \o/
@@ -44,9 +46,11 @@ class JmsSerializerTerminus implements ConfigurableTerminus
     {
         $this->configureContext($config);
 
-        $minibus->addPassenger('_http_headers', [
-            'Content-Type' => 'application/json'
-        ]);
+        if ($minibus instanceof HttpMinibus) {
+            $minibus->getResponse()->headers->set('Content-Type', sprintf(
+                'application/%s', $config['format']
+            ));
+        }
 
         return $this->serializer->serialize(
             $this->extractValidPassengers($minibus),
@@ -65,7 +69,7 @@ class JmsSerializerTerminus implements ConfigurableTerminus
                 ->scalarNode('format')
                     ->defaultValue('json')
                     ->validate()
-                    ->ifNotInArray(['json', 'xml', 'yml'])
+                    ->ifNotInArray(['json', 'xml', 'yaml'])
                         ->thenInvalid('Invalid serialization format "%s"')
                     ->end()
                 ->end()

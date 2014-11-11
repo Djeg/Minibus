@@ -10,21 +10,18 @@ use Knp\Minibus\Terminal\HttpResponseTerminalCenter;
 use Knp\Minibus\Event\Listener\TerminusListener;
 use Knp\Minibus\Event\LineEvents;
 use example\Knp\Minibus\Station\NameStation;
-use Knp\Minibus\Http\ResponseBuilder;
 use Knp\Minibus\Terminus\JmsSerializerTerminus;
 use Knp\Minibus\Terminus\TwigTemplateTerminus;
 use JMS\Serializer\SerializerBuilder;
 use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Http\HttpMinibus;
+use Symfony\Component\HttpFoundation\Request;
 
 class HttpLineFunk implements Spec
 {
     function it_transform_any_terminus_into_http_response()
     {
-        $responseBuilder = new ResponseBuilder([
-            'http_status_code_passenger' => '_http_status',
-            'http_headers_passenger'     => '_http_headers',
-        ]);
-        $terminalCenter = new HttpResponseTerminalCenter(new RawTerminalCenter, $responseBuilder);
+        $terminalCenter = new HttpResponseTerminalCenter(new RawTerminalCenter);
 
         $terminalListener = new TerminusListener($terminalCenter);
         $dispatcher = new EventDispatcher;
@@ -39,7 +36,7 @@ class HttpLineFunk implements Spec
 
         $busLine->addStation(new NameStation);
 
-        $minibus = new Minibus;
+        $minibus = new HttpMinibus(new Request);
         $minibus->addPassenger('_terminus', 'json');
 
         $response = $busLine->lead($minibus);
@@ -48,7 +45,7 @@ class HttpLineFunk implements Spec
         expect($response->headers->get('content-type'))->toReturn('application/json');
         expect($response->getStatusCode())->toReturn(200);
 
-        $minibus = new Minibus;
+        $minibus = new HttpMinibus(new Request);
         $minibus->addPassenger('_terminus', 'twig');
         $minibus->addPassenger('_terminus_config', [
             'template' => 'test.html.twig'
