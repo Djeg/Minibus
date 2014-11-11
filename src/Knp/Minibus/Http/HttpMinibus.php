@@ -15,6 +15,21 @@ use Knp\Minibus\Simple\Minibus as SimpleMinibus;
 class HttpMinibus implements Minibus
 {
     /**
+     * @var Request $request
+     */
+    private $request;
+
+    /**
+     * @var Response $response
+     */
+    private $response;
+
+    /**
+     * @var Minibus $wrappedBus
+     */
+    private $wrappedBus;
+
+    /**
      * @param Request  $request
      * @param Response $response
      * @param Minibus  $wrappedBus
