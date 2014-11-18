@@ -21,7 +21,7 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
 
     function it_is_a_configurable_terminus()
     {
-        $this->shouldHaveType('Knp\Minibus\Terminus\ConfigurableTerminus');
+        $this->shouldHaveType('Knp\Minibus\Config\ConfigurableTerminus');
     }
 
     function it_terminates_by_returning_a_template_result(Minibus $minibus, $twig)
@@ -31,8 +31,9 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
         $minibus->getPassengers()->willReturn(['minibus content']);
 
         $this->terminate($minibus, [
-            'template' => 'template.twig',
-            'key'      => 'minibus'
+            'path'     => 'template.twig',
+            'key'      => 'minibus',
+            'defaults' => []
         ]);
     }
 
@@ -43,8 +44,14 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
         $minibus->getPassengers()->willReturn(['minibus content']);
 
         $this->terminate($minibus, [
-            'template' => 'template.twig',
-            'key'      => ''
+            'path'     => 'template.twig',
+            'key'      => '',
+            'defaults' => []
         ]);
+    }
+
+    function it_contains_twig_template_configuration()
+    {
+        $this->getConfiguration()->shouldHaveType('Knp\Minibus\Terminus\Configuration\TwigTemplateTerminusConfiguration');
     }
 }

@@ -12,7 +12,7 @@ class ResolvableEnteringAndLeavingStation implements Station,
                                                      ResolveEnteringPassengers,
                                                      ResolveLeavingPassengers
 {
-    public function handle(Minibus $bus)
+    public function handle(Minibus $bus, array $configuration = [])
     {
         $bus->addPassenger('resolvable_entering_and_leaving', true);
     }

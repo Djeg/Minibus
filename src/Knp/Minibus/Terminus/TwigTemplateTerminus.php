@@ -2,9 +2,10 @@
 
 namespace Knp\Minibus\Terminus;
 
-use Knp\Minibus\Terminus\ConfigurableTerminus;
 use Knp\Minibus\Minibus;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Terminus\Configuration\TwigTemplateTerminusConfiguration;
 
 /**
  * Display a twig template with the given configuration.
@@ -19,11 +20,17 @@ class TwigTemplateTerminus implements ConfigurableTerminus
     private $twig;
 
     /**
+     * @var TwigTemplateTerminusConfiguration $configuration
+     */
+    private $configuration;
+
+    /**
      * @param \Twig_Environment $twig
      */
     public function __construct(\Twig_Environment $twig)
     {
-        $this->twig = $twig;
+        $this->twig          = $twig;
+        $this->configuration = new TwigTemplateTerminusConfiguration;
     }
 
     /**
@@ -35,22 +42,16 @@ class TwigTemplateTerminus implements ConfigurableTerminus
             [$config['key'] => $minibus->getPassengers()] :
             $minibus->getPassengers()
         ;
+        $context = array_merge($config['defaults'], $context);
 
-        return $this->twig->render($config['template'], $context);
+        return $this->twig->render($config['path'], $context);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configure(ArrayNodeDefinition $node)
+    public function getConfiguration()
     {
-        $node
-            ->children()
-                ->scalarNode('template')->end()
-                ->scalarNode('key')
-                    ->defaultValue('')
-                ->end()
-             ->end()
-        ;
+        return $this->configuration;
     }
 }

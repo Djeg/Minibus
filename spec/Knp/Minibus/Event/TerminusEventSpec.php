@@ -5,12 +5,13 @@ namespace spec\Knp\Minibus\Event;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Knp\Minibus\Minibus;
+use Knp\Minibus\Terminus\Terminus;
 
 class TerminusEventSpec extends ObjectBehavior
 {
-    function let(Minibus $minibus)
+    function let(Minibus $minibus, Terminus $terminus)
     {
-        $this->beConstructedWith($minibus);
+        $this->beConstructedWith($minibus, $terminus, ['terminus configuration']);
     }
 
     function it_is_initializable()
@@ -23,11 +24,19 @@ class TerminusEventSpec extends ObjectBehavior
         $this->shouldHaveType('Symfony\Component\EventDispatcher\Event');
     }
 
-    function it_contains_a_minibus_and_a_final_data($minibus)
-    {
+    function it_contains_a_minibus_a_terminus_and_some_terminus_configuration(
+        $minibus,
+        $terminus,
+        Terminus $newTerminus
+    ) {
         $this->getMinibus()->shouldReturn($minibus);
-        $this->setFinalData('Final data');
 
-        $this->getFinalData()->shouldReturn('Final data');
+        $this->getTerminus()->shouldReturn($terminus);
+        $this->setTerminus($newTerminus);
+        $this->getTerminus()->shouldReturn($newTerminus);
+
+        $this->getConfiguration()->shouldReturn(['terminus configuration']);
+        $this->setConfiguration(['an other configuration']);
+        $this->getConfiguration()->shouldReturn(['an other configuration']);
     }
 }

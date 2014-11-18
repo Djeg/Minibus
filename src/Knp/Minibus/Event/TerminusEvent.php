@@ -4,10 +4,10 @@ namespace Knp\Minibus\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Knp\Minibus\Minibus;
+use Knp\Minibus\Terminus\Terminus;
 
 /**
- * This event is raised after the final station. It can "alterate" the minibus
- * passengers by returning a final data.
+ * This event is launched before a terminus is called inside a line.
  *
  * @author David Jegat <david.jegat@gmail.com>
  */
@@ -19,16 +19,20 @@ class TerminusEvent extends Event
     private $minibus;
 
     /**
-     * @var mixed $finalData
+     * @var Terminus $terminus
      */
-    private $finalData;
+    private $terminus;
 
     /**
-     * @param Minibus $minibus
+     * @var array $configuration
      */
-    public function __construct(Minibus $minibus)
+    private $configuration;
+
+    public function __construct(Minibus $minibus, Terminus $terminus = null, array $configuration = [])
     {
-        $this->minibus = $minibus;
+        $this->minibus       = $minibus;
+        $this->terminus      = $terminus;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -40,18 +44,42 @@ class TerminusEvent extends Event
     }
 
     /**
-     * @param mixed $finalData
+     * @return Terminus|null
      */
-    public function setFinalData($finalData)
+    public function getTerminus()
     {
-        $this->finalData = $finalData;
+        return $this->terminus;
     }
 
     /**
-     * @return mixed
+     * @param Terminus $terminus
+     *
+     * @return TerminusEvent
      */
-    public function getFinalData()
+    public function setTerminus(Terminus $terminus)
     {
-        return $this->finalData;
+        $this->terminus = $terminus;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param array $configuration
+     *
+     * @return TerminusEvent
+     */
+    public function setConfiguration(array $configuration)
+    {
+        $this->configuration = $configuration;
+
+        return $this;
     }
 }

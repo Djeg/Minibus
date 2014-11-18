@@ -25,7 +25,12 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
     function it_is_a_configurable_terminus()
     {
-        $this->shouldHaveType('Knp\Minibus\Terminus\ConfigurableTerminus');
+        $this->shouldHaveType('Knp\Minibus\Config\ConfigurableTerminus');
+    }
+
+    function it_contains_the_configuration()
+    {
+        $this->getConfiguration()->shouldHaveType('Knp\Minibus\Terminus\Configuration\JmsSerializerTerminusConfiguration');
     }
 
     function it_should_serialize_the_minibus_passengers_and_set_http_headers(

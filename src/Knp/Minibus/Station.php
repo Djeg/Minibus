@@ -11,8 +11,8 @@ namespace Knp\Minibus;
 interface Station
 {
     /**
-     * @TODO rename this method
      * @param Minibus $minibus
+     * @param array   $configuration
      */
-    public function handle(Minibus $minibus);
+    public function handle(Minibus $minibus, array $configuration = []);
 }

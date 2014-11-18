@@ -6,9 +6,20 @@ use Knp\Minibus\Line as LineInterface;
 use Knp\Minibus\Event\EventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Knp\Minibus\Station;
-use Knp\Minibus\Minibus as MinibusInterface;
 use Knp\Minibus\Event\LineEvents;
+use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Collection\StationCollection;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Knp\Minibus\Minibus as MinibusInterface;
+use Symfony\Component\Config\Definition\Processor;
+use Knp\Minibus\Config\Configurable;
 
+/**
+ * This is a simple implementation of a line. This implementation should resolve
+ * the most popular workflow cases. It supports events, terminus and configuration.
+ *
+ * @author David Jegat <david.jegat@gmail.com>
+ */
 class Line implements LineInterface
 {
     /**
@@ -17,64 +28,139 @@ class Line implements LineInterface
     private $dispatcher;
 
     /**
+     * @var StationCollection $stations
+     */
+    private $stations;
+
+    /**
+     * @var Terminus|null $terminus
+     */
+    private $terminus;
+
+    /**
+     * @var array $configuration
+     */
+    private $configuration;
+
+    /**
      * @var EventFactory $eventFactory
      */
     private $eventFactory;
 
     /**
-     * @var Station[] $stations
+     * @var Processor $configurationProcessor
      */
-    private $stations;
+    private $configurationProcessor;
 
     /**
      * @param EventDispatcherInterface $dispatcher
+     * @param StationCollection        $stations
      * @param EventFactory             $eventFactory
+     * @param Processor                $configurationProcessor
      */
-    public function __construct(EventDispatcherInterface $dispatcher, EventFactory $eventFactory = null)
+    public function __construct(
+        EventDispatcherInterface $dispatcher             = null,
+        StationCollection        $stations               = null,
+        EventFactory             $eventFactory           = null,
+        Processor                $configurationProcessor = null
+    ) {
+        $this->dispatcher             = $dispatcher ?: new EventDispatcher;
+        $this->stations               = $stations ?: new StationCollection;
+        $this->eventFactory           = $eventFactory ?: new EventFactory;
+        $this->configurationProcessor = $configurationProcessor ?: new Processor;
+        $this->terminus               = null;
+        $this->configuration          = [];
+    }
+
+    /**
+     * Lead the minibus thrie all the stations. If you have defined a Terminus
+     * then the terminus resolved data should be return else the minibus is return.
+     * This method also dispatch events
+     *
+     * @see LineEvents
+     *
+     * @param Minibus $minibus
+     *
+     * @return Minibus|mixed
+     */
+    public function lead(MinibusInterface $minibus)
     {
-        $this->dispatcher   = $dispatcher;
-        $this->eventFactory = $eventFactory ?: new EventFactory;
+        // start the lead.
+        $startEvent = $this->eventFactory->createStart($minibus);
+        $this->dispatcher->dispatch(LineEvents::START, $startEvent);
+
+        $minibus = $startEvent->getMinibus();
+
+        // launch the stations
+        foreach ($this->stations as $station => $configuration) {
+            // pre validate entering passengers
+            $gateOpenEvent = $this->eventFactory->createGate($minibus, $station);
+            $this->dispatcher->dispatch(LineEvents::GATE_OPEN, $gateOpenEvent);
+
+            // parse the configuration if needed
+            if ($station instanceof Configurable) {
+                $configuration = $this->configurationProcessor->processConfiguration(
+                    $station->getConfiguration(),
+                    [$configuration]
+                );
+            }
+
+            // launch the station
+            $station->handle($minibus, $configuration);
+
+            // post validate leaving passengers
+            $gateCloseEvent = $this->eventFactory->createGate($minibus, $station);
+            $this->dispatcher->dispatch(LineEvents::GATE_CLOSE, $gateCloseEvent);
+        }
+
+        // process terminus configuration if needed
+        if (null !== $this->terminus and $this->terminus instanceof Configurable) {
+            $this->configuration = $this->configurationProcessor->processConfiguration(
+                $this->terminus->getConfiguration(),
+                [$this->configuration]
+            );
+        }
+
+        // terminate the line
+        $terminusEvent = $this->eventFactory->createTerminus(
+            $minibus,
+            $this->terminus,
+            $this->configuration
+        );
+        $this->dispatcher->dispatch(LineEvents::TERMINUS, $terminusEvent);
+
+        $terminus      = $terminusEvent->getTerminus();
+        $configuration = $terminusEvent->getConfiguration();
+
+        return null === $terminus ? $minibus : $terminus->terminate($minibus, $configuration);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addStation(Station $station)
+    public function addStation(Station $station, array $configuration = [])
     {
-        $this->stations[] = $station;
+        $this->stations->add($station, $configuration);
 
         return $this;
     }
 
     /**
-     * Lead a minibus to this destination. This implementation raise a few events
-     * in order to manipulate a bus life.
-     *
-     * @param MinibusInterface $minibus
-     *
-     * @return mixed the final data return by the LineEvents::TERMINUS event
+     * {@inheritdoc}
      */
-    public function lead(MinibusInterface $minibus)
+    public function setTerminus(Terminus $terminus, array $configuration = [])
     {
-        $startEvent = $this->eventFactory->createStart($minibus);
+        $this->terminus      = $terminus;
+        $this->configuration = $configuration;
 
-        $this->dispatcher->dispatch(LineEvents::START, $startEvent);
+        return $this;
+    }
 
-        $minibus = $startEvent->getMinibus();
-
-        foreach ($this->stations as $station) {
-            $openGateEvent = $this->eventFactory->createGate($minibus, $station);
-            $this->dispatcher->dispatch(LineEvents::GATE_OPEN, $openGateEvent);
-
-            $station->handle($minibus);
-
-            $closeGateEvent = $this->eventFactory->createGate($minibus, $station);
-            $this->dispatcher->dispatch(LineEvents::GATE_CLOSE, $closeGateEvent);
-        }
-
-        $terminusEvent = $this->eventFactory->createTerminus($minibus);
-        $this->dispatcher->dispatch(LineEvents::TERMINUS, $terminusEvent);
-
-        return $terminusEvent->getFinalData();
+    /**
+     * {@inheritdoc}
+     */
+    public function getDispatcher()
+    {
+        return $this->dispatcher;
     }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResolvableLeavingStation implements Station, ResolveLeavingPassengers
 {
-    public function handle(Minibus $bus)
+    public function handle(Minibus $bus, array $configuration = [])
     {
         $bus->addPassenger('resolvable_leaving', true);
     }

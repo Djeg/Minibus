@@ -2,13 +2,14 @@
 
 namespace Knp\Minibus\Terminus;
 
-use Knp\Minibus\Terminus\ConfigurableTerminus;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Knp\Minibus\Minibus;
 use JMS\Serializer\SerializationContext;
 use Knp\Minibus\Http\HttpMinibus;
 use Symfony\Component\HttpFoundation\Response;
+use Knp\Minibus\Terminus\Configuration\JmsSerializerTerminusConfiguration;
+use Knp\Minibus\Config\ConfigurableTerminus;
 
 /**
  * Serialize minibus passengers \o/
@@ -28,6 +29,11 @@ class JmsSerializerTerminus implements ConfigurableTerminus
     private $context;
 
     /**
+     * @var JmsSerializerTerminusConfiguration $configuration
+     */
+    private $configuration;
+
+    /**
      * @param Serializer           $serializer
      * @param SerializationContext $context
      */
@@ -35,8 +41,9 @@ class JmsSerializerTerminus implements ConfigurableTerminus
         Serializer $serializer,
         SerializationContext $context = null
     ) {
-        $this->serializer = $serializer;
-        $this->context    = $context ?: SerializationContext::create();
+        $this->serializer    = $serializer;
+        $this->context       = $context ?: SerializationContext::create();
+        $this->configuration = new JmsSerializerTerminusConfiguration;
     }
 
     /**
@@ -53,7 +60,7 @@ class JmsSerializerTerminus implements ConfigurableTerminus
         }
 
         return $this->serializer->serialize(
-            $this->extractValidPassengers($minibus),
+            $minibus->getPassengers(),
             $config['format'],
             $this->context
         );
@@ -62,48 +69,9 @@ class JmsSerializerTerminus implements ConfigurableTerminus
     /**
      * {@inheritdoc}
      */
-    public function configure(ArrayNodeDefinition $node)
+    public function getConfiguration()
     {
-        $node
-            ->children()
-                ->scalarNode('format')
-                    ->defaultValue('json')
-                    ->validate()
-                    ->ifNotInArray(['json', 'xml', 'yaml'])
-                        ->thenInvalid('Invalid serialization format "%s"')
-                    ->end()
-                ->end()
-                ->floatNode('version')
-                    ->defaultNull()
-                ->end()
-                ->arrayNode('groups')
-                    ->defaultValue([])
-                    ->prototype('scalar')->end()
-                ->end()
-                ->booleanNode('enable_max_depth_check')
-                    ->defaultFalse()
-                ->end()
-            ->end()
-        ;
-    }
-
-    /**
-     * @param Minibus $minibus
-     *
-     * @return array the valid passengers
-     */
-    private function extractValidPassengers(Minibus $minibus)
-    {
-        $passengers = [];
-        foreach ($minibus->getPassengers() as $name => $passenger) {
-            if (strpos($name, '_') === 0) {
-                continue;
-            }
-
-            $passengers[$name] = $passenger;
-        }
-
-        return $passengers;
+        return $this->configuration;
     }
 
     /**

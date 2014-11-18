@@ -9,6 +9,7 @@ use Knp\Minibus\Event\TerminusEvent;
 use Knp\Minibus\Station;
 use Knp\Minibus\Event\GateEvent;
 use Knp\Minibus\Event\StartEvent;
+use Knp\Minibus\Terminus\Terminus;
 
 class EventFactorySpec extends ObjectBehavior
 {
@@ -22,25 +23,31 @@ class EventFactorySpec extends ObjectBehavior
         $this->createStart($bus)->shouldReturnStartEventWith($bus);
     }
 
-    function it_creates_a_terminus_event(Minibus $minibus)
-    {
-        $this->createTerminus($minibus)->shouldReturnTerminusEventWith($minibus);
-    }
-
     function it_creates_gate_event(Minibus $minibus, Station $station)
     {
         $this->createGate($minibus, $station)->shouldReturnGateEventWith($minibus, $station);
     }
 
+    function it_create_a_terminus_event(Minibus $minibus, Terminus $terminus)
+    {
+        $this
+            ->createTerminus($minibus, $terminus, ['configuration'])
+            ->shouldReturnTerminusEventWith($minibus, $terminus, ['configuration'])
+        ;
+    }
+
     function getMatchers()
     {
         return [
-            'returnTerminusEventWith' => function ($event, $minibus) {
+            'returnTerminusEventWith' => function ($event, $minibus, $terminus, $configuration) {
                 if (!$event instanceof TerminusEvent) {
                     return false;
                 }
 
-                return $event->getMinibus() === $minibus && $event->getFinalData() === null;
+                return $event->getMinibus() === $minibus &&
+                    $event->getTerminus() === $terminus &&
+                    $event->getConfiguration() === $configuration
+                ;
             },
             'returnGateEventWith' => function ($event, $minibus, $station) {
                 if (!$event instanceof GateEvent) {
