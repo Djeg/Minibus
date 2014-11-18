@@ -12,7 +12,7 @@ Ladies and gentleman, let me present you the famous, the incredible, the revolut
 If you are like me, you are probably coding software solutions. In many software
 architectures the story starts with an **Entry point** (cf: a controller in an MVC application). But
 if you think about this **Entry Point** you probably agree with
-me that it's not only **one point** but, in many cases, a mix of many **components**!
+me that it's not only **one point** but, in many cases, a mix of many **components** that interact between them!
 
 
 In order to avoid what I call **SMFB** architecture (understand: Super Mega
@@ -26,51 +26,57 @@ three **components**:
 - Some `Stations`, that can handle a minibus at some point (replace the controller).
 - Finally a bus `Line` that contains `Stations` and can guide a `Minibus`
 
-## MVC vs MVB (Model View Bus)
+## Cool! Let's rock!
 
-To understand the differences between those two patterns here is some wonderful
-art illustrating the point:
-
-
-### The MVC
-![MVC Art](.images/MVC.png)
-
-### The MVB
-![MVB Art](.images/MVB.png)
-
-## I can't wait! Let's start traveling!
-
-If you're wondering how it is possible to travel through software lands with php, this
-is the answer:
+A basic example would be somethong like this:
 
 ```php
-<?php
+use Knp\Minibus\Station;
+use Knp\Minibus\Minibus;
 
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Knp\Minibus\Simple\Line;
-use Knp\Minibus\Simple\Minibus;
-
-# Before traveling, we need a bus line
-$busLine = new Line(new EventDispatcher);
-
-# Okay, in order to take all the minibus passengers to their destination we need to create
-# Bus stations !
-class DreamlandStation implements Station
+class CrazyStation implements Station
 {
-    public function handle(Minibus $minibus)
+    public function handle(Minibus $minibus, array $configuration = [])
     {
-        // let's interact with the minibus
-        $minibus->addPassenger('sheldon', ['name' => 'sheldon']);
+        // You can add passenger
+        $minibus->addPassenger('Sheldon', ['name' => 'Cooper', 'from' => 'The Big Bang Theory']);
+
+        // Ensure a passenger existence
+        if (!$minibus->hasPassenger('Sheldon')) {
+            throw new \Exception('Wow something is going wrong :/');
+        }
+
+        // Retrieve a passenger
+        $from = $minibus->getPassenger('Sheldon')['from'];
+
+        // Or add as many passengers you want
+        $minibus->setPassengers([
+            'George' => 'Abitbol',
+        ]);
     }
 }
-
-# Let's add the station to our bus line :
-$busLine->addStation(new DreamlandStation);
-
-# Now we just to make the bus line leads the minibus:
-$busLine->lead(new Minibus);
 ```
 
-## Get more!
+Once you have some stations, you need to create a `Minibus` and a `Line`:
 
-TODO
+
+```php
+// test.php
+
+use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Simple\Line;
+
+$minibus = new Minibus;
+$line    = new Line;
+
+// add the station in the line
+$line->addStation(new CrazyStation);
+
+// finally lead te minibus thrue all the registered stations
+$line->lead($minibus); // return the minibus
+
+echo $minibus->getPassenger('George'); // print "Abitbol" :)
+```
+
+
+That's all!
