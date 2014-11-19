@@ -25,7 +25,7 @@ class LineSpec extends ObjectBehavior
         EventFactory             $eventFactory,
         Processor                $processor
     ) {
-        $this->beConstructedWith($dispatcher, null, $eventFactory, $processor);
+        $this->beConstructedWith($dispatcher, $eventFactory, $processor);
     }
 
     function it_is_initializable()

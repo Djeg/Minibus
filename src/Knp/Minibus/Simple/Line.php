@@ -28,7 +28,7 @@ class Line implements LineInterface
     private $dispatcher;
 
     /**
-     * @var StationCollection $stations
+     * @var \SplObjectStorage $stations
      */
     private $stations;
 
@@ -54,18 +54,16 @@ class Line implements LineInterface
 
     /**
      * @param EventDispatcherInterface $dispatcher
-     * @param StationCollection        $stations
      * @param EventFactory             $eventFactory
      * @param Processor                $configurationProcessor
      */
     public function __construct(
         EventDispatcherInterface $dispatcher             = null,
-        StationCollection        $stations               = null,
         EventFactory             $eventFactory           = null,
         Processor                $configurationProcessor = null
     ) {
         $this->dispatcher             = $dispatcher ?: new EventDispatcher;
-        $this->stations               = $stations ?: new StationCollection;
+        $this->stations               = new \SplObjectStorage;
         $this->eventFactory           = $eventFactory ?: new EventFactory;
         $this->configurationProcessor = $configurationProcessor ?: new Processor;
         $this->terminus               = null;
@@ -92,7 +90,8 @@ class Line implements LineInterface
         $minibus = $startEvent->getMinibus();
 
         // launch the stations
-        foreach ($this->stations as $station => $configuration) {
+        foreach ($this->stations as $station) {
+            $configuration = $this->stations[$station];
             // pre validate entering passengers
             $gateOpenEvent = $this->eventFactory->createGate($minibus, $station);
             $this->dispatcher->dispatch(LineEvents::GATE_OPEN, $gateOpenEvent);
@@ -140,7 +139,7 @@ class Line implements LineInterface
      */
     public function addStation(Station $station, array $configuration = [])
     {
-        $this->stations->add($station, $configuration);
+        $this->stations->attach($station, $configuration);
 
         return $this;
     }
