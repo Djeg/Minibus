@@ -39,7 +39,7 @@ class JmsSerializerTerminusConfiguration implements ConfigurationInterface
                     ->defaultValue([])
                     ->prototype('scalar')->end()
                 ->end()
-                ->booleanNode('')
+                ->booleanNode('to_root')
                     ->defaultValue(true)
                 ->end()
                 ->floatNode('version')
