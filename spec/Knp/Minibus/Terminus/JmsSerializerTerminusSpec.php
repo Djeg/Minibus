@@ -48,6 +48,8 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
         $this->terminate($minibus, [
             'format'                 => 'json',
+            'map'                    => [],
+            'to_root'                => [],
             'version'                => null,
             'groups'                 => null,
             'enable_max_depth_check' => false,
@@ -57,6 +59,8 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
         $this->terminate($minibus, [
             'format'                 => 'json',
+            'map'                    => [],
+            'to_root'                => [],
             'version'                => 2,
             'groups'                 => null,
             'enable_max_depth_check' => false,
@@ -66,6 +70,8 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
         $this->terminate($minibus, [
             'format'                 => 'json',
+            'map'                    => [],
+            'to_root'                => [],
             'version'                => 2,
             'groups'                 => ['a', 'b'],
             'enable_max_depth_check' => false,
@@ -75,6 +81,8 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
         $this->terminate($minibus, [
             'format'                 => 'json',
+            'map'                    => [],
+            'to_root'                => [],
             'version'                => 2,
             'groups'                 => ['a', 'b'],
             'enable_max_depth_check' => true,

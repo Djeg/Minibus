@@ -10,6 +10,7 @@ use Knp\Minibus\Http\HttpMinibus;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Minibus\Terminus\Configuration\JmsSerializerTerminusConfiguration;
 use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Exception\MissingPassengerException;
 
 /**
  * Serialize minibus passengers \o/
@@ -60,7 +61,7 @@ class JmsSerializerTerminus implements ConfigurableTerminus
         }
 
         return $this->serializer->serialize(
-            $minibus->getPassengers(),
+            $this->extractPassenger($minibus, $config['map'], $config['to_root']),
             $config['format'],
             $this->context
         );
@@ -90,5 +91,34 @@ class JmsSerializerTerminus implements ConfigurableTerminus
         if ($config['enable_max_depth_check']) {
             $this->context->enableMaxDepthChecks();
         }
+    }
+
+    private function extractPassenger(Minibus $minibus, array $map, $toRoot = true)
+    {
+        if (empty($map)) {
+            return $minibus->getPassengers();
+        }
+
+        $finalPassenger = [];
+
+        foreach ($map as $passenger) {
+            $value = $minibus->getPassenger($passenger, null);
+
+            if (null === $value) {
+                throw new MissingPassengerException(sprintf(
+                    'The passenger "%s" does not exists in the minibus.',
+                    $passenger
+                ));
+            }
+
+            $finalPassengers[$passenger] = $value;
+        }
+
+        if (count($finalPassengers) === 1 and $toRoot) {
+            $finalPassengers = array_values($finalPassengers);
+            $finalPassengers = $finalPassengers[0];
+        }
+
+        return $finalPassengers;
     }
 }
