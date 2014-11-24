@@ -29,7 +29,7 @@ Feature: Feed a cat
 
     Scenario: Successfully feed my cat
         Given I have a cat named Garfield
-        When I give him some super meet bowls
+        When I give him some super meat bowls
         Then Garfield should be fat
         And Garfield should be happy
 ```
@@ -53,7 +53,7 @@ class Cat
 
     public function eat($food)
     {
-        if ($food === 'super meet bowls') {
+        if ($food === 'super meat bowls') {
             $this->happy = true;
             $this->fat   = true;
         }
@@ -103,11 +103,11 @@ assert($minibus->getPassenger('cat')->getName() === 'Garfield');
 
 ### Step 3, the stations
 
-The stations represent the **step** of an **application workflow**. For exemple, in
+Each `Knp\Minibus\Station` represent a **step** in your  **application workflow**. For exemple, in
 the previous feature, we can detect those 2 **steps** :
 
 - `I have a cat named Garfield`
-- `I give him some super meet bowls`
+- `I give him some super meat bowls`
 
 Let's create them:
 
