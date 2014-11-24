@@ -1,6 +1,10 @@
 Minibus [![Build Status](https://travis-ci.org/Djeg/Minibus.svg)](https://travis-ci.org/Djeg/Minibus) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Djeg/Minibus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 ======================================================================================================================================================================================================================================================================================================================================================================================================================
 
+<p style="text-align: center;">
+    <img src=".images/minibus.png" alt="minibus" />
+</p>
+
 Hey welcome to you traveler! You are looking for a way of traveling through your
 software easily? Do not search anymore, you've just find *the* place!
 
@@ -78,5 +82,12 @@ $line->lead($minibus); // return the minibus
 echo $minibus->getPassenger('George'); // print "Abitbol" :)
 ```
 
+## Go further
 
-That's all!
+This is some other documentations that explain everything in details:
+
+ - [Basic usage](.doc/basic_usage.md)
+ - [Set up terminus](.doc/set_up_a_terminus.md)
+ - [Deal with events](.doc/deal_with_events.md)
+ - [Validate your minibus](.doc/validate_your_minibus.md)
+ - [Configure your stations and terminus](.doc/configure_your_stations_and_terminus.md)
