@@ -25,7 +25,7 @@ A complete list of events are stored inside `Knp\Minibus\Event\LineEvents`. But
 this is the list (attach to their own `Event` instance).
 
 | Event                    | Instance                          | Description                                     |
-|----------------------------------------------------------------------------------------------------------------|
+| ------------------------ | --------------------------------- | ----------------------------------------------- |
 | `LineEvents::START`      | `Knp\Minibus\Event\StartEvent`    | Raised before the line is leaded                |
 | `LineEvents::GATE_OPEN`  | `Knp\Minibus\Event\GateEvent`     | Raised just before a minibus enter in a station |
 | `LineEvents::GATE_CLOSE` | `Knp\Minibus\Event\GateEvent`     | Raised when a minibus leave a station           |
