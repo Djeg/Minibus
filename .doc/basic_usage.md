@@ -103,7 +103,7 @@ assert($minibus->getPassenger('cat')->getName() === 'Garfield');
 
 ### Step 3, the stations
 
-The stations represent the **step** of an **application workfl**. For exemple, in
+The stations represent the **step** of an **application workflow**. For exemple, in
 the previous feature, we can detect those 2 **steps** :
 
 - `I have a cat named Garfield`

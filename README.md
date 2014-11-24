@@ -1,7 +1,7 @@
 Minibus [![Build Status](https://travis-ci.org/Djeg/Minibus.svg)](https://travis-ci.org/Djeg/Minibus) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Djeg/Minibus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Djeg/Minibus/?branch=master) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Djeg/Minibus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 ======================================================================================================================================================================================================================================================================================================================================================================================================================
 
-<p style="text-align: center;">
+<p align="center">
     <img src=".images/minibus.png" alt="minibus" />
 </p>
 
