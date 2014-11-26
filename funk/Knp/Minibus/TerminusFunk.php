@@ -46,7 +46,7 @@ class TerminusFunk implements Spec
             ->addStation($station1)
             ->addStation($station2)
             ->setTerminus($terminus, [
-                'path' => $template
+                'template' => $template
             ])
         ;
 

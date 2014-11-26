@@ -31,7 +31,7 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
         $minibus->getPassengers()->willReturn(['minibus content']);
 
         $this->terminate($minibus, [
-            'path'     => 'template.twig',
+            'template' => 'template.twig',
             'key'      => 'minibus',
             'defaults' => []
         ]);
@@ -44,7 +44,7 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
         $minibus->getPassengers()->willReturn(['minibus content']);
 
         $this->terminate($minibus, [
-            'path'     => 'template.twig',
+            'template' => 'template.twig',
             'key'      => '',
             'defaults' => []
         ]);

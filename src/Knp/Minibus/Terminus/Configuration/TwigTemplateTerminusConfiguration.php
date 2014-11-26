@@ -22,7 +22,7 @@ class TwigTemplateTerminusConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('path')->end()
+                ->scalarNode('template')->end()
                 ->scalarNode('key')
                     ->defaultValue('')
                 ->end()

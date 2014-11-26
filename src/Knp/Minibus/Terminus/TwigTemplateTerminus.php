@@ -44,7 +44,7 @@ class TwigTemplateTerminus implements ConfigurableTerminus
         ;
         $context = array_merge($config['defaults'], $context);
 
-        return $this->twig->render($config['path'], $context);
+        return $this->twig->render($config['template'], $context);
     }
 
     /**
