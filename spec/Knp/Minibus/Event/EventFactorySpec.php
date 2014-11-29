@@ -9,7 +9,7 @@ use Knp\Minibus\Event\TerminusEvent;
 use Knp\Minibus\Station;
 use Knp\Minibus\Event\GateEvent;
 use Knp\Minibus\Event\StartEvent;
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 
 class EventFactorySpec extends ObjectBehavior
 {

@@ -22,7 +22,7 @@ class RouteRedirectionTerminusSpec extends ObjectBehavior
 
     function it_is_a_configurable_terminus()
     {
-        $this->shouldHaveType('Knp\Minibus\Config\ConfigurableTerminus');
+        $this->shouldHaveType('Knp\Minibus\Configurable\ConfigurableTerminus');
     }
 
     function it_contains_the_configuration()

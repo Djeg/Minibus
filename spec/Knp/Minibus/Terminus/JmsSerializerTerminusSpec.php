@@ -9,7 +9,6 @@ use Knp\Minibus\Minibus;
 use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Response;
-use Knp\Minibus\Http\HttpMinibus;
 
 class JmsSerializerTerminusSpec extends ObjectBehavior
 {
@@ -25,7 +24,7 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
 
     function it_is_a_configurable_terminus()
     {
-        $this->shouldHaveType('Knp\Minibus\Config\ConfigurableTerminus');
+        $this->shouldHaveType('Knp\Minibus\Configurable\ConfigurableTerminus');
     }
 
     function it_contains_the_configuration()
@@ -34,17 +33,13 @@ class JmsSerializerTerminusSpec extends ObjectBehavior
     }
 
     function it_should_serialize_the_minibus_passengers_and_set_http_headers(
-        HttpMinibus $minibus,
+        Minibus $minibus,
         $serializer,
         $context,
-        Response $response,
         HeaderBag $headers
     ) {
         $minibus->getPassengers()->willReturn(['passengers']);
         $serializer->serialize(['passengers'], 'json', $context)->willReturn('["passengers"]');
-        $minibus->getResponse()->willReturn($response);
-        $response->headers = $headers;
-        $headers->set('Content-Type', 'application/json')->shouldBeCalled();
 
         $this->terminate($minibus, [
             'format'                 => 'json',

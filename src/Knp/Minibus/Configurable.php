@@ -1,6 +1,6 @@
 <?php
 
-namespace Knp\Minibus\Config;
+namespace Knp\Minibus;
 
 /**
  * Defined a station or a terminus has configurable.

@@ -21,7 +21,7 @@ class TwigTemplateTerminusSpec extends ObjectBehavior
 
     function it_is_a_configurable_terminus()
     {
-        $this->shouldHaveType('Knp\Minibus\Config\ConfigurableTerminus');
+        $this->shouldHaveType('Knp\Minibus\Configurable\ConfigurableTerminus');
     }
 
     function it_terminates_by_returning_a_template_result(Minibus $minibus, $twig)

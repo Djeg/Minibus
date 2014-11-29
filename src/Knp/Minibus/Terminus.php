@@ -1,8 +1,6 @@
 <?php
 
-namespace Knp\Minibus\Terminus;
-
-use Knp\Minibus\Minibus;
+namespace Knp\Minibus;
 
 /**
  * A terminus can terminate a minibus, deal with passengers and tranform a

@@ -5,7 +5,7 @@ namespace spec\Knp\Minibus\Event;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Knp\Minibus\Minibus;
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 
 class TerminusEventSpec extends ObjectBehavior
 {

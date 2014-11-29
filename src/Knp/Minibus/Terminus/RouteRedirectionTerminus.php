@@ -2,7 +2,7 @@
 
 namespace Knp\Minibus\Terminus;
 
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Knp\Minibus\Terminus\Configuration\RouteRedirectionConfiguration;
 use Knp\Minibus\Minibus;

@@ -4,7 +4,7 @@ namespace Knp\Minibus\Terminus;
 
 use Knp\Minibus\Minibus;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Knp\Minibus\Terminus\Configuration\TwigTemplateTerminusConfiguration;
 
 /**

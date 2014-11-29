@@ -4,7 +4,7 @@ namespace Knp\Minibus\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Knp\Minibus\Minibus;
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 
 /**
  * This event is launched before a terminus is called inside a line.

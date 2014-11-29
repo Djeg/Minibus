@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Knp\Minibus\Simple;
+namespace spec\Knp\Minibus\Line;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -13,9 +13,9 @@ use Knp\Minibus\Event\StartEvent;
 use Knp\Minibus\Event\LineEvents;
 use Knp\Minibus\Event\GateEvent;
 use Knp\Minibus\Event\TerminusEvent;
-use Knp\Minibus\Terminus\Terminus;
-use Knp\Minibus\Config\ConfigurableStation;
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Terminus;
+use Knp\Minibus\Configurable\ConfigurableStation;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class LineSpec extends ObjectBehavior
@@ -30,7 +30,7 @@ class LineSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\Minibus\Simple\Line');
+        $this->shouldHaveType('Knp\Minibus\Line\Line');
     }
 
     function it_is_a_line()

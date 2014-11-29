@@ -2,7 +2,7 @@
 
 namespace Knp\Minibus;
 
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 
 /**
  * A minibus is led by this instance of a line in order of acheive the

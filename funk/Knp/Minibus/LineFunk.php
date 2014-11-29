@@ -4,8 +4,8 @@ namespace funk\Knp\Minibus;
 
 use Funk\Spec;
 use example\Knp\Minibus\Station\BasicStation;
-use Knp\Minibus\Simple\Line;
-use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Line\Line;
+use Knp\Minibus\Minibus\Minibus;
 use example\Knp\Minibus\Station\OtherBasicStation;
 use example\Knp\Minibus\Terminus\UselessTerminus;
 use example\Knp\Minibus\Station\SomeConfigurableStation;

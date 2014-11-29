@@ -2,7 +2,7 @@
 
 namespace example\Knp\Minibus\Terminus;
 
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use example\Knp\Minibus\Terminus\Configuration\SomeTerminusConfig;
 use Knp\Minibus\Minibus;
 

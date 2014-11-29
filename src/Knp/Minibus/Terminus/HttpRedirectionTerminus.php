@@ -2,7 +2,7 @@
 
 namespace Knp\Minibus\Terminus;
 
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Knp\Minibus\Minibus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Knp\Minibus\Terminus\Configuration\HttpRedirectionConfiguration as Configuration;

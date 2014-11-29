@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Knp\Minibus\Simple;
+namespace spec\Knp\Minibus\Minibus;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -9,7 +9,7 @@ class MinibusSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\Minibus\Simple\Minibus');
+        $this->shouldHaveType('Knp\Minibus\Minibus\Minibus');
     }
 
     function it_is_a_minibus()

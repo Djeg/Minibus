@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Knp\Minibus\Http;
+namespace spec\Knp\Minibus\Minibus;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,7 +17,7 @@ class HttpMinibusSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\Minibus\Http\HttpMinibus');
+        $this->shouldHaveType('Knp\Minibus\Minibus\HttpMinibus');
     }
 
     function it_is_a_minibus()

@@ -3,8 +3,8 @@
 namespace funk\Knp\Minibus;
 
 use Funk\Spec;
-use Knp\Minibus\Simple\Minibus;
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Minibus\Minibus;
+use Knp\Minibus\Line\Line;
 use JMS\Serializer\SerializerBuilder;
 use example\Knp\Minibus\Station\OtherBasicStation;
 use example\Knp\Minibus\Station\BasicStation;

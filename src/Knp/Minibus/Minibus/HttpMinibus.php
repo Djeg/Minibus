@@ -1,11 +1,11 @@
 <?php
 
-namespace Knp\Minibus\Http;
+namespace Knp\Minibus\Minibus;
 
 use Knp\Minibus\Minibus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Knp\Minibus\Simple\Minibus as SimpleMinibus;
+use Knp\Minibus\Minibus\Minibus as DefaultMinibus;
 
 /**
  * A specialisation of a minibus in an http environment.
@@ -35,13 +35,13 @@ class HttpMinibus implements Minibus
      * @param Minibus  $wrappedBus
      */
     public function __construct(
-        Request $request,
+        Request  $request,
         Response $response = null,
-        Minibus $wrappedBus = null
+        Minibus  $wrappedBus = null
     ) {
         $this->request    = $request;
         $this->response   = $response ?: new Response;
-        $this->wrappedBus = $wrappedBus ?: new SimpleMinibus;
+        $this->wrappedBus = $wrappedBus ?: new DefaultMinibus;
     }
 
     /**

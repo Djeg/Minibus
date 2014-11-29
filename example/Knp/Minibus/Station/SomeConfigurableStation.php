@@ -2,7 +2,7 @@
 
 namespace example\Knp\Minibus\Station;
 
-use Knp\Minibus\Config\ConfigurableStation;
+use Knp\Minibus\Configurable\ConfigurableStation;
 use example\Knp\Minibus\Station\Configuration\SomeConfiguration;
 use Knp\Minibus\Minibus;
 

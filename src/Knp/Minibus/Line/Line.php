@@ -1,18 +1,18 @@
 <?php
 
-namespace Knp\Minibus\Simple;
+namespace Knp\Minibus\Line;
 
 use Knp\Minibus\Line as LineInterface;
 use Knp\Minibus\Event\EventFactory;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Knp\Minibus\Station;
 use Knp\Minibus\Event\LineEvents;
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 use Knp\Minibus\Collection\StationCollection;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Knp\Minibus\Minibus as MinibusInterface;
 use Symfony\Component\Config\Definition\Processor;
-use Knp\Minibus\Config\Configurable;
+use Knp\Minibus\Configurable;
 
 /**
  * This is a simple implementation of a line. This implementation should resolve

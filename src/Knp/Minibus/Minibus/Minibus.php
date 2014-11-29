@@ -1,6 +1,6 @@
 <?php
 
-namespace Knp\Minibus\Simple;
+namespace Knp\Minibus\Minibus;
 
 use Knp\Minibus\Minibus as MinibusInterface;
 

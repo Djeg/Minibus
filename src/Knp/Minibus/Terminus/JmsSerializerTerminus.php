@@ -6,10 +6,9 @@ use JMS\Serializer\Serializer;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Knp\Minibus\Minibus;
 use JMS\Serializer\SerializationContext;
-use Knp\Minibus\Http\HttpMinibus;
 use Symfony\Component\HttpFoundation\Response;
 use Knp\Minibus\Terminus\Configuration\JmsSerializerTerminusConfiguration;
-use Knp\Minibus\Config\ConfigurableTerminus;
+use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Knp\Minibus\Exception\MissingPassengerException;
 
 /**
@@ -53,12 +52,6 @@ class JmsSerializerTerminus implements ConfigurableTerminus
     public function terminate(Minibus $minibus, array $config)
     {
         $this->configureContext($config);
-
-        if ($minibus instanceof HttpMinibus) {
-            $minibus->getResponse()->headers->set('Content-Type', sprintf(
-                'application/%s', $config['format']
-            ));
-        }
 
         return $this->serializer->serialize(
             $this->extractPassenger($minibus, $config['map'], $config['to_root']),
