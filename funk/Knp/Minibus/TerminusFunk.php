@@ -10,6 +10,8 @@ use example\Knp\Minibus\Station\OtherBasicStation;
 use example\Knp\Minibus\Station\BasicStation;
 use Knp\Minibus\Terminus\JmsSerializerTerminus;
 use Knp\Minibus\Terminus\TwigTemplateTerminus;
+use Symfony\Component\HttpFoundation\Response;
+use Knp\Minibus\Terminus\HttpWrapperTerminus;
 
 class TerminusFunk implements Spec
 {
@@ -51,5 +53,32 @@ class TerminusFunk implements Spec
         ;
 
         expect($line->lead($minibus))->toBe('Basic is OK and Other basic is OK');
+    }
+
+    function it_can_wrap_any_terminus_into_a_response()
+    {
+        $minibus         = new Minibus;
+        $line            = new Line;
+        $terminus        = new TwigTemplateTerminus(new \Twig_Environment(new \Twig_Loader_String));
+        $station1        = new BasicStation;
+        $station2        = new OtherBasicStation;
+        $template        = 'Basic is {% if basic %}OK{% else %}NOT OK{% endif %} and Other basic is {% if other_basic %}OK{% else %}NOT OK{% endif %}';
+        $terminusWrapper = new HttpWrapperTerminus($terminus);
+
+        $line
+            ->addStation($station1)
+            ->addStation($station2)
+            ->setTerminus($terminusWrapper, [
+                'template' => $template,
+                'headers'  => [
+                    'Content-Type' => 'text/html'
+                ]
+            ])
+        ;
+
+        $response = $line->lead($minibus);
+
+        expect($response instanceof Response)->toBe(true);
+        expect($response->getContent())->toBe('Basic is OK and Other basic is OK');
     }
 }
