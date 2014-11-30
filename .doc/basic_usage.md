@@ -82,8 +82,8 @@ class Cat
 // cat_app.php
 require 'vendor/autoload.php';
 
-use Knp\Minibus\Simple\Line;
-use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Line\Line;
+use Knp\Minibus\Minibus\Minibus;
 
 // create a minibus, it's like an application container.
 $minibus = new Minibus;
@@ -163,8 +163,8 @@ Let's add some stations inside our previously created `Line`:
 // cat_app.php
 require 'vendor/autoload.php';
 
-use Knp\Minibus\Simple\Line;
-use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Line\Line;
+use Knp\Minibus\Minibus\Minibus;
 
 // create a minibus, it's like an application container.
 $minibus = new Minibus;
@@ -192,7 +192,7 @@ Garfield should be happy and not hungry anymore! Well done!
 
 
 The important thing is to understant that a line will **contains**
-`Knp\Minibus\Station` and during the `Knp\Minibus\Simple\Line::lead` will
+`Knp\Minibus\Station` and during the `Knp\Minibus\Line\Line::lead` will
 execute all the registered `Knp\Minibus\Station` in the **same order** as you
 declare them.
 

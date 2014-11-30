@@ -5,7 +5,7 @@ You probably discover how to travel with Minibus. But what about transforming
 the minibus passengers into something else ?
 
 
-In order to do that you just need to add a `Knp\Minibus\Terminus\Terminus`
+In order to do that you just need to add a `Knp\Minibus\Terminus`
 inside your `Knp\Minibus\Line`. To get the **transformed** passengers you
 just need to store the result of `Knp\Minibus\Line::lead`.
 
@@ -37,7 +37,7 @@ depending on the cat inside nop?
 A terminus is something like this:
 
 ```php
-use Knp\Minibus\Terminus\Terminus;
+use Knp\Minibus\Terminus;
 use Knp\Minibus\Minibus;
 
 class SleepingTerminus implements Terminus
@@ -67,8 +67,8 @@ Now we get the terminus we can add it to the line!
 // cat_app.php
 require 'vendor/autoload.php';
 
-use Knp\Minibus\Simple\Line;
-use Knp\Minibus\Simple\Minibus;
+use Knp\Minibus\Line\Line;
+use Knp\Minibus\Minibus\Minibus;
 
 // create a minibus, it's like an application container.
 $minibus = new Minibus;

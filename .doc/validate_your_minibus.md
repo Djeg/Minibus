@@ -12,7 +12,7 @@ to the `Line` dispatcher.
 
 
 ```php
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Line\Line;
 use Knp\Minibus\Event\Subscriber\ExpectationStationSubscriber;
 
 $line = new Line;

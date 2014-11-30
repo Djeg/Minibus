@@ -1,7 +1,7 @@
 Deal with event
 ===============
 
-A `Line` during its lifecycle dispatch some events. It's reallu usefull when
+A `Line` during its lifecycle dispatch some events. It's really usefull when
 you want to *hook* a specific behavior.
 
 ## Retrieve the dispatcher
@@ -9,7 +9,7 @@ you want to *hook* a specific behavior.
 When you create a `Line` you can precise your own dispatcher:
 
 ```php
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Line\Line;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 $dispatcher = new EventDispatcher;

@@ -6,7 +6,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Knp\Minibus\Event\LineEvents;
 use Knp\Minibus\Event\GateEvent;
 use Knp\Minibus\Expectation\ResolveEnteringPassengers;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 
@@ -20,7 +19,7 @@ use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 class ExpectationStationSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var OptionsResolverInterface $resolver
+     * @var OptionsResolver $resolver
      */
     private $resolver;
 
@@ -37,9 +36,9 @@ class ExpectationStationSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function __construct(OptionsResolverInterface $resolver = null)
+    public function __construct(OptionsResolver $resolver = null)
     {
         $this->resolver = $resolver ?: new OptionsResolver;
     }

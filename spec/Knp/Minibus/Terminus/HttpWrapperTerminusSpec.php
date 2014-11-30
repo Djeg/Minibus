@@ -27,6 +27,7 @@ class HttpWrapperTerminusSpec extends ObjectBehavior
 
     function it_contains_an_http_wrapper_configuration()
     {
+        $this->getConfiguration()->shouldHaveType('Knp\Minibus\Terminus\Configuration\HttpWrapperConfiguration');
     }
 
     function it_wrap_a_terminus_into_an_http_response($terminus, Minibus $minibus)

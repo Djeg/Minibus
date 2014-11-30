@@ -28,7 +28,8 @@ three **components**:
 
 - A `Minibus`, which contains various passengers (understand data).
 - Some `Stations`, that can handle a minibus at some point (replace the controller).
-- Finally a bus `Line` that contains `Stations` and can guide a `Minibus`
+- A bus `Line` that contains `Stations` and can guide a `Minibus`.
+- Optionaly a `Terminus` that can handle how to display the passengers.
 
 ## Cool! Let's rock!
 
@@ -67,8 +68,8 @@ Once you have some stations, you need to create a `Minibus` and a `Line`:
 ```php
 // test.php
 
-use Knp\Minibus\Simple\Minibus;
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Minibus\Minibus;
+use Knp\Minibus\Line\Line;
 
 $minibus = new Minibus;
 $line    = new Line;

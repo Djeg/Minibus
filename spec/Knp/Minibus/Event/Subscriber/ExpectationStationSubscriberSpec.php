@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Knp\Minibus\Event\LineEvents;
 use Knp\Minibus\Event\GateEvent;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Knp\Minibus\Event\Subscriber\ExpectationStationSubscriber;
 use Knp\Minibus\Minibus;
 use Knp\Minibus\Expectation\ResolveEnteringPassengers;
@@ -15,7 +15,7 @@ use Knp\Minibus\Station;
 
 class ExpectationStationSubscriberSpec extends ObjectBehavior
 {
-    function let(OptionsResolverInterface $resolver)
+    function let(OptionsResolver $resolver)
     {
         $this->beConstructedWith($resolver);
     }

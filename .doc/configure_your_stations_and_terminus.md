@@ -22,7 +22,7 @@ public function addStation(Station $station, array $configuration = []);
 So you can send configuration into your stations like this:
 
 ```php
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Line\Line;
 
 $line = new Line;
 
@@ -32,10 +32,10 @@ $line->addStation(new SomeStation, ['some' => 'configuration']);
 
 ## Send configuration to a terminus
 
-You can do the same thing with a `Knp\Minibus\Terminus\Terminus`.
+You can do the same thing with a `Knp\Minibus\Terminus`.
 
 ```php
-use Knp\Minibus\Simple\Line;
+use Knp\Minibus\Line\Line;
 
 $line = new Line;
 
@@ -82,15 +82,15 @@ class MyStationConfiguration implements ConfigurationInterface
 
 ### Plug the configuration into the Station or Terminus
 
-Finally you need to implement the `Knp\Minibus\Config\ConfigurableStation` or
-the `Knp\Minibus\Config\ConfigurableTerminus` interfaces. Let's take an
+Finally you need to implement the `Knp\Minibus\Configurable\ConfigurableStation` or
+the `Knp\Minibus\Configurable\ConfigurableTerminus` interfaces. Let's take an
 example with the [`CreateCatStion`](basic_usage.md).
 
 ```php
 // CreateCatStation.php
 use Knp\Minibus\Station;
 use Knp\Minibus\Minibus;
-use Knp\Minibus\Config\ConfigurableStation;
+use Knp\Minibus\Configurable\ConfigurableStation;
 
 class CreateCatStation implements Station, ConfigurableStation
 {
