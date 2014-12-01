@@ -2,7 +2,7 @@
 
 namespace Knp\Minibus\Expectation;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * This interface can be used with the ExpectationStopSubscriber class. This
@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 interface ResolveEnteringPassengers
 {
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setEnteringPassengers(OptionsResolverInterface $resolver);
+    public function setEnteringPassengers(OptionsResolver $resolver);
 }
