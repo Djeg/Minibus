@@ -6,7 +6,7 @@ use Knp\Minibus\Station;
 use Knp\Minibus\Expectation\ResolveEnteringPassengers;
 use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 use Knp\Minibus\Minibus;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResolvableEnteringAndLeavingStation implements Station,
                                                      ResolveEnteringPassengers,
@@ -17,12 +17,12 @@ class ResolvableEnteringAndLeavingStation implements Station,
         $bus->addPassenger('resolvable_entering_and_leaving', true);
     }
 
-    public function setEnteringPassengers(OptionsResolverInterface $resolver)
+    public function setEnteringPassengers(OptionsResolver $resolver)
     {
         $resolver->setRequired(['basic']);
     }
 
-    public function setLeavingPassengers(OptionsResolverInterface $resolver)
+    public function setLeavingPassengers(OptionsResolver $resolver)
     {
         $resolver->setRequired(['resolvable_entering_and_leaving']);
     }

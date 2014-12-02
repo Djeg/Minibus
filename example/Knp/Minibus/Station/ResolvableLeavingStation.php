@@ -5,7 +5,7 @@ namespace example\Knp\Minibus\Station;
 use Knp\Minibus\Station;
 use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 use Knp\Minibus\Minibus;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResolvableLeavingStation implements Station, ResolveLeavingPassengers
 {
@@ -14,7 +14,7 @@ class ResolvableLeavingStation implements Station, ResolveLeavingPassengers
         $bus->addPassenger('resolvable_leaving', true);
     }
 
-    public function setLeavingPassengers(OptionsResolverInterface $resolver)
+    public function setLeavingPassengers(OptionsResolver $resolver)
     {
         $resolver->setRequired(['resolvable_leaving']);
         $resolver->setAllowedTypes(['resolvable_leaving' => 'bool']);

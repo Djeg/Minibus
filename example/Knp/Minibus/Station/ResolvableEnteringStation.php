@@ -4,7 +4,7 @@ namespace example\Knp\Minibus\Station;
 
 use Knp\Minibus\Station;
 use Knp\Minibus\Minibus;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Knp\Minibus\Expectation\ResolveEnteringPassengers;
 
 class ResolvableEnteringStation implements Station, ResolveEnteringPassengers
@@ -14,7 +14,7 @@ class ResolvableEnteringStation implements Station, ResolveEnteringPassengers
         $bus->addPassenger('resolvable_entering', true);
     }
 
-    public function setEnteringPassengers(OptionsResolverInterface $resolver)
+    public function setEnteringPassengers(OptionsResolver $resolver)
     {
         $resolver->setRequired('basic');
         $resolver->setAllowedTypes(['basic' => 'bool']);
