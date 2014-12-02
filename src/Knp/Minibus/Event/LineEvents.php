@@ -3,7 +3,7 @@
 namespace Knp\Minibus\Event;
 
 /**
- * All the events dispatched by a, line.
+ * All the events dispatched by a line.
  */
 abstract class LineEvents
 {

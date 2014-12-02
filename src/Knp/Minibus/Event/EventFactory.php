@@ -7,9 +7,8 @@ use Knp\Minibus\Station;
 use Knp\Minibus\Terminus;
 
 /**
- * A simple collaborator for objects that are used to dispatch and creates events.
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * A simple collaborator for objects that are used to dispatch and create 
+ * events.
  */
 class EventFactory
 {

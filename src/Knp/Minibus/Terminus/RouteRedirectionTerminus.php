@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Knp\Minibus\Exception\MissingPassengerException;
 
 /**
- * Redirect to a given route.
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * Redirect to a given route using the symfony router.
  */
 class RouteRedirectionTerminus implements ConfigurableTerminus
 {

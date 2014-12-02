@@ -8,9 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Knp\Minibus\Terminus\Configuration\HttpRedirectionConfiguration as Configuration;
 
 /**
- * Redirect to the given path.
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * Redirect to the given url using a symfony RedirectResponse.
  */
 class HttpRedirectionTerminus implements ConfigurableTerminus
 {

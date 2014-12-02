@@ -12,9 +12,7 @@ use Knp\Minibus\Expectation\ResolveLeavingPassengers;
 /**
  * This subscriber can enhanced the station with some validation inside. If
  * a station implements the ResolveEnteringPassengers or ResolveLeavingPassengers
- * then an option resolver will resolve all of this stop.
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * then an option resolver will resolve all of this passengers.
  */
 class ExpectationStationSubscriber implements EventSubscriberInterface
 {

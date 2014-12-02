@@ -7,8 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * It wrap any configuration and add the default http configuration.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class HttpWrapperConfiguration implements ConfigurationInterface
 {

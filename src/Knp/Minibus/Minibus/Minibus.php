@@ -5,9 +5,7 @@ namespace Knp\Minibus\Minibus;
 use Knp\Minibus\Minibus as MinibusInterface;
 
 /**
- * A very simple implementation of a minibus storing passengers in memory.
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * A very simple implementation of a minibus using in memory storage.
  */
 class Minibus implements MinibusInterface, \IteratorAggregate
 {

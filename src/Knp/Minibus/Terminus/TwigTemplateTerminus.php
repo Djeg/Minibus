@@ -9,8 +9,6 @@ use Knp\Minibus\Terminus\Configuration\TwigTemplateTerminusConfiguration;
 
 /**
  * Display a twig template with the given configuration.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class TwigTemplateTerminus implements ConfigurableTerminus
 {

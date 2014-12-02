@@ -12,9 +12,7 @@ use Knp\Minibus\Configurable\ConfigurableTerminus;
 use Knp\Minibus\Exception\MissingPassengerException;
 
 /**
- * Serialize minibus passengers \o/
- *
- * @author David Jegat <david.jegat@gmail.com>
+ * Serialize minibus passengers with the jms serializer \o/.
  */
 class JmsSerializerTerminus implements ConfigurableTerminus
 {

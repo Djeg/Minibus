@@ -5,10 +5,8 @@ namespace Knp\Minibus;
 use Knp\Minibus\Terminus;
 
 /**
- * A minibus is led by this instance of a line in order of acheive the
+ * A minibus is lead by this implementation of a line in order of acheive the
  * requested destination. Please have a good trip ^.^
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 interface Line
 {

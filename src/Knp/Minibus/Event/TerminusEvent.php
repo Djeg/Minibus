@@ -8,8 +8,6 @@ use Knp\Minibus\Terminus;
 
 /**
  * This event is launched before a terminus is called inside a line.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class TerminusEvent extends Event
 {

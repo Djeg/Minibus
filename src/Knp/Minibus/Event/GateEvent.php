@@ -9,8 +9,6 @@ use Knp\Minibus\Minibus;
 /**
  * This event is raised when a station open and closed a minibus gate. In
  * "software" friendly words, before and after a station "handle" a minibus.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class GateEvent extends Event
 {

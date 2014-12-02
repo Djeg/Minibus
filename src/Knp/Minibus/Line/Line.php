@@ -17,8 +17,6 @@ use Knp\Minibus\Configurable;
 /**
  * This is a simple implementation of a line. This implementation should resolve
  * the most popular workflow cases. It supports events, terminus and configuration.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class Line implements LineInterface
 {

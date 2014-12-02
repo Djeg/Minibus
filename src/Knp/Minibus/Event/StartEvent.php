@@ -7,8 +7,6 @@ use Symfony\Component\EventDispatcher\Event;
 
 /**
  * This event is raised when a line start.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class StartEvent extends Event
 {

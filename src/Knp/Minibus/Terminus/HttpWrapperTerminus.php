@@ -11,8 +11,6 @@ use Knp\Minibus\Terminus\Configuration\HttpWrapperConfiguration;
 
 /**
  * Wrapp any kind of terminus into an http response.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class HttpWrapperTerminus implements ConfigurableTerminus
 {

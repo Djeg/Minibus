@@ -7,8 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * Defined the configuration for the RouteRedirectionTerminus.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class RouteRedirectionConfiguration implements ConfigurationInterface
 {

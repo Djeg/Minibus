@@ -7,8 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * Defined how a TwigTemplateTerminus should be configured.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class TwigTemplateTerminusConfiguration implements ConfigurationInterface
 {

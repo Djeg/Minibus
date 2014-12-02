@@ -7,8 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * Defined the configuration allowed by the JmsSerializerTerminus.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class JmsSerializerTerminusConfiguration implements ConfigurationInterface
 {

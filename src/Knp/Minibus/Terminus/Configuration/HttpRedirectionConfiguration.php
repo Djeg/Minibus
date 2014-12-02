@@ -7,8 +7,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 /**
  * Defined the configuration of an HttpRedirectionTerminus.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class HttpRedirectionConfiguration implements ConfigurationInterface
 {

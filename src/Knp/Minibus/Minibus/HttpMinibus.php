@@ -9,8 +9,6 @@ use Knp\Minibus\Minibus\Minibus as DefaultMinibus;
 
 /**
  * A specialisation of a minibus in an http environment.
- *
- * @author David Jegat <david.jegat@gmail.com>
  */
 class HttpMinibus implements Minibus
 {
