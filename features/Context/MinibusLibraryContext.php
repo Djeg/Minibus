@@ -82,7 +82,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
      */
     public function createConfigurableStation()
     {
-        self::$stations = [];
+        self::$stations   = [];
         self::$stations[] = new SomeConfigurableStation();
     }
 
@@ -95,7 +95,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Given I create a line instance
+     * @Given I create a line
      */
     public function createLine()
     {
@@ -168,7 +168,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @When I add the stations inside the line
+     * @When I add the stations to the line
      */
     public function addStations()
     {
@@ -178,7 +178,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @When I add the station inside the line with the configuration:
+     * @When I add the station to the line with the configuration:
      */
     public function addStationAndConfigure(TableNode $table)
     {
@@ -230,7 +230,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then /^I should be able to lead the minibus thrue the lines( witheout errors)?$/
+     * @Then /^I should be able to lead the minibus through the line( without errors)?$/
      */
     public function leadMinibus()
     {
@@ -251,7 +251,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should get ":message" when i lead the minibus
+     * @Then I should get ":message" when I lead the minibus
      */
     public function shouldGetOnLead($message)
     {
@@ -259,9 +259,9 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then my minibus should contains the following passengers:
+     * @Then my minibus should contain the following passengers:
      */
-    public function minbusShouldContains(TableNode $table)
+    public function minibusShouldContain(TableNode $table)
     {
         $passengers = array_keys($table->getRowsHash());
 
@@ -291,7 +291,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should get the following json when the bus is leaded:
+     * @Then I should get the following json when the bus is led:
      */
     public function assertJsonEquals(PyStringNode $node)
     {
@@ -301,7 +301,7 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should get the following string when the bus is leaded:
+     * @Then I should get the following string when the bus is led:
      */
     public function expectLineToReturnTemplate(PyStringNode $node)
     {
@@ -309,9 +309,9 @@ class MinibusLibraryContext implements SnippetAcceptingContext
     }
 
     /**
-     * @Then I should received a 200 response with the following content:
+     * @Then I should receive a 200 response with the following content:
      */
-    public function iShouldReceivedResponseWithContent(PyStringNode $node)
+    public function iShouldReceiveResponseWithContent(PyStringNode $node)
     {
         $response = self::$line->lead(self::$minibus);
 
