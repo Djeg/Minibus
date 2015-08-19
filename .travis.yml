@@ -6,4 +6,4 @@ before_script:
     - composer install --prefer-source
 script:
     - bin/phpspec run -fpretty --verbose
-    - bin/funk
+    - bin/behat --verbose

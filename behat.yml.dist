@@ -1,0 +1,12 @@
+default:
+    calls:
+        error_reporting: 8191
+    autoload:
+        '': %paths.base%/features/Context
+    suites:
+        library:
+            paths:
+                - %paths.base%/features
+            contexts:
+                - Context\MinibusLibraryContext
+
